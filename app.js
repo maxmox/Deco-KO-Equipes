@@ -522,22 +522,21 @@ function mkTeamCol(team, wtMap) {
 
   // Team info panel (turno, meta, obs)
   const teamInfo = appState.teamInfo?.[team.id] || {};
+  const currentTurno = teamInfo.turno || '07:00–12:00 / 13:00–16:00';
   const infoPanel = document.createElement('div');
   infoPanel.className = 'team-info-panel';
   infoPanel.innerHTML = `
     <div class="team-info-row">
       <label>⏰ Turno</label>
       <select class="team-info-select" data-field="turno" data-team="${team.id}">
-        <option value="">— Selecionar —</option>
-        <option value="06:00–12:00" ${teamInfo.turno === '06:00–12:00' ? 'selected' : ''}>06:00 – 12:00</option>
-        <option value="07:00–11:30 / 13:00–17:00" ${teamInfo.turno === '07:00–11:30 / 13:00–17:00' ? 'selected' : ''}>07:00–11:30 / 13:00–17:00</option>
-        <option value="12:00–18:00" ${teamInfo.turno === '12:00–18:00' ? 'selected' : ''}>12:00 – 18:00</option>
-        <option value="18:00–06:00" ${teamInfo.turno === '18:00–06:00' ? 'selected' : ''}>18:00 – 06:00 (Noturno)</option>
-        <option value="integral" ${teamInfo.turno === 'integral' ? 'selected' : ''}>Integral</option>
-        <option value="custom" ${teamInfo.turno === 'custom' ? 'selected' : ''}>Personalizado...</option>
+        <option value="07:00–12:00 / 13:00–16:00" ${currentTurno === '07:00–12:00 / 13:00–16:00' ? 'selected' : ''}>07:00–16:00 (Expediente)</option>
+        <option value="07:00–12:00" ${currentTurno === '07:00–12:00' ? 'selected' : ''}>07:00–12:00 (Meio turno manhã)</option>
+        <option value="13:00–18:00" ${currentTurno === '13:00–18:00' ? 'selected' : ''}>13:00–18:00 (Meio turno tarde)</option>
+        <option value="integral" ${currentTurno === 'integral' ? 'selected' : ''}>Integral</option>
+        <option value="custom" ${currentTurno === 'custom' ? 'selected' : ''}>Personalizado...</option>
       </select>
     </div>
-    ${teamInfo.turno === 'custom' ? `<div class="team-info-row"><label></label><input type="text" class="team-info-input" data-field="turnoCustom" data-team="${team.id}" value="${teamInfo.turnoCustom || ''}" placeholder="Ex: 05:30–14:00"></div>` : ''}
+    ${currentTurno === 'custom' ? `<div class="team-info-row"><label></label><input type="text" class="team-info-input" data-field="turnoCustom" data-team="${team.id}" value="${teamInfo.turnoCustom || ''}" placeholder="Ex: 05:30–14:00"></div>` : ''}
     <div class="team-info-row">
       <label>🎯 Meta</label>
       <input type="text" class="team-info-input" data-field="meta" data-team="${team.id}" value="${teamInfo.meta || ''}" placeholder="Ex: 50m de canaleta (opcional)">
