@@ -5,14 +5,45 @@ const STATE_KEY = 'deco-ko-state-v6';
 const EDITS_KEY = 'deco-ko-edits-v1';
 let appState = {}; // { slots: {teamId:{sgIdx:[{label,worker}]}}, edits:{} }
 
+const firebaseConfig = {
+  apiKey: "AIzaSyCHcYzXafUg8rXiUgzGYh2dEqDTPqamnFA",
+  authDomain: "decoko-6a92f.firebaseapp.com",
+  projectId: "decoko-6a92f",
+  storageBucket: "decoko-6a92f.firebasestorage.app",
+  messagingSenderId: "168414348142",
+  appId: "1:168414348142:web:a5a48c542cc56c4de5777f"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 function init() {
   if (sessionStorage.getItem('decoko_auth') !== 'true') {
     document.getElementById('loginOverlay').style.display = 'flex';
   } else {
     document.getElementById('loginOverlay').style.display = 'none';
   }
-  loadAppState();
-  renderAll();
+  
+  db.ref('appState').on('value', (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      appState = data;
+    } else {
+      initializeDefaultState();
+      save(); // Write default to DB
+    }
+    renderAll();
+  });
+
+  db.ref('history').on('value', snap => {
+    appHistory = snap.val() || [];
+    // If modal is open, refresh it
+    const modal = document.querySelector('.history-modal');
+    if (modal) {
+      const parent = modal.parentElement;
+      parent.remove();
+      openHistoryModal();
+    }
+  });
+
   document.getElementById('searchInput').addEventListener('input', onSearch);
   const filterSel = document.getElementById('poolFilterSelect');
   if (filterSel) filterSel.addEventListener('change', () => renderPool(getWorkerTeamMap()));
@@ -31,48 +62,31 @@ function checkLogin() {
 }
 
 // ---- PERSISTENCE ----
-function loadAppState() {
-  try { appState = JSON.parse(localStorage.getItem(STATE_KEY)); } catch(e) { appState = null; }
-  
-  if (!appState || !appState.slots) {
-    if (typeof DEFAULT_BACKUP !== 'undefined' && DEFAULT_BACKUP.appState) {
-      appState = JSON.parse(DEFAULT_BACKUP.appState);
-      if (DEFAULT_BACKUP.edits) appState.edits = JSON.parse(DEFAULT_BACKUP.edits);
-    } else {
-      // Build initial state from TEAMS + DEFAULT_STATE
-      appState = { slots: {}, edits: {}, teams: JSON.parse(JSON.stringify(TEAMS)) };
-      appState.teams.forEach(t => {
-        appState.slots[t.id] = {};
-        t.subgrupos.forEach((sg, si) => {
-          appState.slots[t.id][si] = sg.slots.map((s, sli) => ({
-            label: s.label,
-            worker: DEFAULT_STATE[t.id]?.[String(si)]?.[sli] || null
-          }));
-        });
+function initializeDefaultState() {
+  if (typeof DEFAULT_BACKUP !== 'undefined' && DEFAULT_BACKUP.appState) {
+    appState = JSON.parse(DEFAULT_BACKUP.appState);
+    if (DEFAULT_BACKUP.edits) appState.edits = JSON.parse(DEFAULT_BACKUP.edits);
+  } else {
+    appState = { slots: {}, edits: {}, teams: JSON.parse(JSON.stringify(TEAMS)) };
+    appState.teams.forEach(t => {
+      appState.slots[t.id] = {};
+      t.subgrupos.forEach((sg, si) => {
+        appState.slots[t.id][si] = sg.slots.map((s, sli) => ({
+          label: s.label,
+          worker: DEFAULT_STATE[t.id]?.[String(si)]?.[sli] || null
+        }));
       });
-    }
-    save();
+    });
   }
-  if (!appState.teams) {
-    appState.teams = JSON.parse(JSON.stringify(TEAMS));
-    save();
-  }
-  
-  // Load edits
-  if (!appState.edits) {
-    try { const e = JSON.parse(localStorage.getItem(EDITS_KEY)); if (e) appState.edits = e; } catch(e) {}
-    if (!appState.edits) {
-      if (typeof DEFAULT_BACKUP !== 'undefined' && DEFAULT_BACKUP.edits) {
-        appState.edits = JSON.parse(DEFAULT_BACKUP.edits);
-      } else {
-        appState.edits = {};
-      }
-    }
-  }
+  if (!appState.edits) appState.edits = {};
 }
 
-function save() { localStorage.setItem(STATE_KEY, JSON.stringify(appState)); }
-function saveEdits() { localStorage.setItem(EDITS_KEY, JSON.stringify(appState.edits)); }
+function save() { 
+  if (appState && appState.slots) {
+    db.ref('appState').set(appState);
+  }
+}
+function saveEdits() { save(); }
 
 function getSlots(teamId, sgIdx) {
   return appState.slots[teamId]?.[sgIdx] || [];
@@ -664,12 +678,14 @@ function updateStats(wtMap) {
 }
 
 // ---- HISTORY / SNAPSHOTS ----
-const HISTORY_KEY = 'deco-ko-history-v1';
+let appHistory = [];
 
 function getHistory() {
-  try { return JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; } catch(e) { return []; }
+  return appHistory;
 }
-function saveHistory(h) { localStorage.setItem(HISTORY_KEY, JSON.stringify(h)); }
+function saveHistory(h) { 
+  db.ref('history').set(h); 
+}
 
 function saveSnapshot(name) {
   const h = getHistory();
