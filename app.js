@@ -29,6 +29,10 @@ function init() {
     document.getElementById('loginOverlay').style.display = 'none';
   }
   
+  // Previne tela preta carregando o estado local/backup imediatamente
+  initializeDefaultState();
+  renderAll();
+
   if (db) {
     db.ref('appState').on('value', (snapshot) => {
       const data = snapshot.val();
@@ -37,15 +41,12 @@ function init() {
         if (!appState.teams && typeof TEAMS !== 'undefined') appState.teams = JSON.parse(JSON.stringify(TEAMS));
         if (!appState.slots) appState.slots = {};
         if (!appState.edits) appState.edits = {};
+        renderAll();
       } else {
-        initializeDefaultState();
-        save(); // Write default to DB
+        save(); // Se o banco estiver vazio, salva o estado atual
       }
-      renderAll();
     }, (error) => {
       console.warn("Erro ao conectar no Firebase:", error.message);
-      initializeDefaultState();
-      renderAll();
     });
 
     db.ref('history').on('value', snap => {
