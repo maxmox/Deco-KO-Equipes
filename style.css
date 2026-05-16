@@ -17,7 +17,8 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
 }
 .header-row1 {
   display:flex; align-items:center; gap:12px;
-  padding:6px 16px; border-bottom:1px solid rgba(46,51,68,0.5);
+  padding:8px 16px; border-bottom:1px solid rgba(46,51,68,0.5);
+  min-height:36px;
 }
 .header-row2 {
   display:flex; align-items:center; gap:4px;
@@ -42,7 +43,7 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
 .stats .dup-count { color:var(--dup); font-weight:600; }
 
 /* LAYOUT: pool fixed left + scrollable teams */
-.app-layout { display:flex; margin-top:68px; height:calc(100vh - 68px); }
+.app-layout { display:flex; margin-top:72px; height:calc(100vh - 72px); }
 
 .pool-panel {
   width:var(--pool-w); min-width:var(--pool-w); flex-shrink:0;

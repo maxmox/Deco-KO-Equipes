@@ -631,8 +631,6 @@ function mkTeamCol(team, wtMap) {
       if (wid) {
         const w = WORKERS.find(x => x.id === wid);
         if (w) {
-          const lb = document.createElement('span'); lb.className = 'slot-label';
-          lb.textContent = slot.label; sl.appendChild(lb);
           const cd = mkCard(w, team.id, si, sli, wtMap);
           cd.style.cssText = 'margin:0;flex:1;border:none;padding:2px 4px;background:transparent;';
           sl.appendChild(cd);
