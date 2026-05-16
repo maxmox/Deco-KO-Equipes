@@ -460,7 +460,7 @@ function mkCard(w, fromTeam, fromSg, fromSlot, wtMap) {
   el.title = title;
   let badge = tc > 1 ? `<span class="dup-badge">${tc}×</span>` : (tc === 1 ? '<span style="font-size:9px;color:var(--mil);">✓</span>' : '');
   let roleHtml = disp.role ? `<span class="card-role">${disp.role}</span>` : '';
-  el.innerHTML = `<span class="type-badge ${w.subtipo}"></span><span class="card-name">${w.nome}</span>${roleHtml}${badge}`;
+  el.innerHTML = `<span class="type-badge ${w.subtipo}"></span><span class="card-name">${w.nome}</span>${roleHtml}<span class="card-funcao">${disp.funcao}</span>${badge}`;
   el.addEventListener('dragstart', e => {
     e.dataTransfer.setData('text/plain', w.id);
     e.dataTransfer.setData('fromTeam', fromTeam || 'pool');
