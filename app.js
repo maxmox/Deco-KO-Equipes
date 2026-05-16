@@ -5,17 +5,23 @@ const STATE_KEY = 'deco-ko-state-v6';
 const EDITS_KEY = 'deco-ko-edits-v1';
 let appState = {}; // { slots: {teamId:{sgIdx:[{label,worker}]}}, edits:{} }
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCHcYzXafUg8rXiUgzGYh2dEqDTPqamnFA",
-  authDomain: "decoko-6a92f.firebaseapp.com",
-  databaseURL: "https://decoko-6a92f-default-rtdb.firebaseio.com",
-  projectId: "decoko-6a92f",
-  storageBucket: "decoko-6a92f.firebasestorage.app",
-  messagingSenderId: "168414348142",
-  appId: "1:168414348142:web:a5a48c542cc56c4de5777f"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+let db = null;
+try {
+  const firebaseConfig = {
+    apiKey: "AIzaSyCHcYzXafUg8rXiUgzGYh2dEqDTPqamnFA",
+    authDomain: "decoko-6a92f.firebaseapp.com",
+    databaseURL: "https://decoko-6a92f-default-rtdb.firebaseio.com",
+    projectId: "decoko-6a92f",
+    storageBucket: "decoko-6a92f.firebasestorage.app",
+    messagingSenderId: "168414348142",
+    appId: "1:168414348142:web:a5a48c542cc56c4de5777f"
+  };
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.database();
+} catch (err) {
+  console.warn("Firebase offline ou bloqueado:", err);
+}
+
 function init() {
   if (sessionStorage.getItem('decoko_auth') !== 'true') {
     document.getElementById('loginOverlay').style.display = 'flex';
@@ -23,36 +29,45 @@ function init() {
     document.getElementById('loginOverlay').style.display = 'none';
   }
   
-  db.ref('appState').on('value', (snapshot) => {
-    const data = snapshot.val();
-    if (data) {
-      appState = data;
-    } else {
+  if (db) {
+    db.ref('appState').on('value', (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        appState = data;
+        if (!appState.teams && typeof TEAMS !== 'undefined') appState.teams = JSON.parse(JSON.stringify(TEAMS));
+        if (!appState.slots) appState.slots = {};
+        if (!appState.edits) appState.edits = {};
+      } else {
+        initializeDefaultState();
+        save(); // Write default to DB
+      }
+      renderAll();
+    }, (error) => {
+      console.warn("Erro ao conectar no Firebase:", error.message);
       initializeDefaultState();
-      save(); // Write default to DB
-    }
-    renderAll();
-  }, (error) => {
-    alert("Erro ao conectar no Firebase (Banco de Dados): " + error.message + "\n\nO sistema vai carregar offline com o último backup.");
+      renderAll();
+    });
+
+    db.ref('history').on('value', snap => {
+      appHistory = snap.val() || [];
+      const modal = document.querySelector('.history-modal');
+      if (modal) {
+        const parent = modal.parentElement;
+        parent.remove();
+        openHistoryModal();
+      }
+    });
+  } else {
     initializeDefaultState();
     renderAll();
-  });
-
-  db.ref('history').on('value', snap => {
-    appHistory = snap.val() || [];
-    // If modal is open, refresh it
-    const modal = document.querySelector('.history-modal');
-    if (modal) {
-      const parent = modal.parentElement;
-      parent.remove();
-      openHistoryModal();
-    }
-  });
+  }
 
   document.getElementById('searchInput').addEventListener('input', onSearch);
   const filterSel = document.getElementById('poolFilterSelect');
   if (filterSel) filterSel.addEventListener('change', () => renderPool(getWorkerTeamMap()));
 }
+
+
 
 function checkLogin() {
   const u = document.getElementById('loginUser').value.trim();
@@ -69,8 +84,10 @@ function checkLogin() {
 // ---- PERSISTENCE ----
 function initializeDefaultState() {
   if (typeof DEFAULT_BACKUP !== 'undefined' && DEFAULT_BACKUP.appState) {
-    appState = JSON.parse(DEFAULT_BACKUP.appState);
-    if (DEFAULT_BACKUP.edits) appState.edits = JSON.parse(DEFAULT_BACKUP.edits);
+    try { appState = JSON.parse(DEFAULT_BACKUP.appState); } catch(e) { appState = {}; }
+    if (DEFAULT_BACKUP.edits) {
+      try { appState.edits = JSON.parse(DEFAULT_BACKUP.edits); } catch(e) {}
+    }
   } else {
     appState = { slots: {}, edits: {}, teams: JSON.parse(JSON.stringify(TEAMS)) };
     appState.teams.forEach(t => {
@@ -83,6 +100,8 @@ function initializeDefaultState() {
       });
     });
   }
+  if (!appState.teams && typeof TEAMS !== 'undefined') appState.teams = JSON.parse(JSON.stringify(TEAMS));
+  if (!appState.slots) appState.slots = {};
   if (!appState.edits) appState.edits = {};
 }
 
@@ -130,8 +149,7 @@ function exportState() {
 
 function exportBackup() {
   const data = {
-    appState: localStorage.getItem(STATE_KEY),
-    edits: localStorage.getItem(EDITS_KEY)
+    appState: JSON.stringify(appState)
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
@@ -146,17 +164,22 @@ function importBackup(event) {
     try {
       const data = JSON.parse(e.target.result);
       if (data.appState) {
-        localStorage.setItem(STATE_KEY, data.appState);
-        if (data.edits) localStorage.setItem(EDITS_KEY, data.edits);
+        appState = JSON.parse(data.appState);
+        if (data.edits) appState.edits = JSON.parse(data.edits);
+        if (!appState.teams && typeof TEAMS !== 'undefined') appState.teams = JSON.parse(JSON.stringify(TEAMS));
+        if (!appState.slots) appState.slots = {};
+        if (!appState.edits) appState.edits = {};
+        
+        if (db) db.ref('appState').set(appState);
         alert('Backup importado com sucesso!');
-        location.reload();
+        renderAll();
       } else {
         alert('Arquivo inválido ou corrompido.');
       }
     } catch (err) {
       alert('Erro ao ler arquivo: ' + err.message);
     }
-  };
+  }
   reader.readAsText(file);
   event.target.value = ''; // reset input
 }
