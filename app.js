@@ -388,6 +388,39 @@ function renameSubgroup(teamId, sgIdx) {
   }
 }
 
+function addSubgroup(teamId) {
+  const t = appState.teams.find(x => x.id === teamId);
+  if (!t) return;
+  const name = prompt('Nome da nova subcategoria:');
+  if (!name || !name.trim()) return;
+  const newSg = { nome: name.trim(), slots: [{ label: 'Vaga 1' }] };
+  t.subgrupos.push(newSg);
+  // Inicializa os slots no appState
+  const newIdx = t.subgrupos.length - 1;
+  if (!appState.slots[teamId]) appState.slots[teamId] = {};
+  appState.slots[teamId][newIdx] = [{ label: 'Vaga 1', worker: null }];
+  save(); renderAll();
+}
+
+function deleteSubgroup(teamId, sgIdx) {
+  const t = appState.teams.find(x => x.id === teamId);
+  if (!t) return;
+  const sgName = t.subgrupos[sgIdx].nome || `Subgrupo ${sgIdx + 1}`;
+  if (!confirm(`Excluir a subcategoria "${sgName}" e todas as suas vagas?`)) return;
+  // Remove o subgrupo
+  t.subgrupos.splice(sgIdx, 1);
+  // Reorganiza os slots (reindexar)
+  const oldSlots = appState.slots[teamId] || {};
+  const newSlots = {};
+  t.subgrupos.forEach((sg, newIdx) => {
+    // Mapeia: indices < sgIdx ficam iguais, >= sgIdx pegam o próximo
+    const oldIdx = newIdx < sgIdx ? newIdx : newIdx + 1;
+    newSlots[newIdx] = oldSlots[oldIdx] || sg.slots.map(s => ({ label: s.label, worker: null }));
+  });
+  appState.slots[teamId] = newSlots;
+  save(); renderAll();
+}
+
 function assignWorker(teamId, sgIdx, slotIdx, workerId) {
   if (!appState.slots[teamId]) appState.slots[teamId] = {};
   if (!appState.slots[teamId][sgIdx]) appState.slots[teamId][sgIdx] = [];
@@ -578,11 +611,13 @@ function mkTeamCol(team, wtMap) {
     if (sg.nome.trim() !== '') {
       sgHeader = `<div class="subgroup-title" style="display:flex; align-items:center;">
         <span style="flex:1;">${sg.nome}</span>
-        <button class="ctrl-btn" title="Renomear Subgrupo" onclick="renameSubgroup('${team.id}', ${si})">✏️</button>
+        <button class="ctrl-btn" title="Renomear" onclick="renameSubgroup('${team.id}', ${si})">✏️</button>
+        <button class="ctrl-btn ctrl-del" title="Excluir Subcategoria" onclick="deleteSubgroup('${team.id}', ${si})">🗑</button>
       </div>`;
     } else {
       sgHeader = `<div class="subgroup-title" style="display:flex; justify-content:flex-end;">
-        <button class="ctrl-btn" title="Nomear Subgrupo" onclick="renameSubgroup('${team.id}', ${si})">✏️</button>
+        <button class="ctrl-btn" title="Nomear" onclick="renameSubgroup('${team.id}', ${si})">✏️</button>
+        <button class="ctrl-btn ctrl-del" title="Excluir Subcategoria" onclick="deleteSubgroup('${team.id}', ${si})">🗑</button>
       </div>`;
     }
     sgDiv.innerHTML = sgHeader;
@@ -671,6 +706,15 @@ function mkTeamCol(team, wtMap) {
 
     body.appendChild(sgDiv);
   });
+
+  // Botão para adicionar nova subcategoria
+  const addSgBtn = document.createElement('button');
+  addSgBtn.className = 'add-slot-btn';
+  addSgBtn.style.cssText = 'margin:8px 6px; border-style:dashed; opacity:0.7;';
+  addSgBtn.innerHTML = '📁 Nova subcategoria';
+  addSgBtn.onclick = () => addSubgroup(team.id);
+  body.appendChild(addSgBtn);
+
   col.appendChild(body); return col;
 }
 
