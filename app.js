@@ -804,17 +804,13 @@ function saveHistory(h) {
 
 function updateSnapshotIndicator() {
   let el = document.getElementById('snapshotIndicator');
+  const slot = document.getElementById('snapshotIndicatorSlot');
+  if (!slot) return;
   if (!el) {
-    // Cria o indicador no header
-    const header = document.querySelector('.header');
-    if (!header) return;
     el = document.createElement('div');
     el.id = 'snapshotIndicator';
     el.className = 'snapshot-indicator';
-    // Insere após o h1
-    const h1 = header.querySelector('h1');
-    if (h1 && h1.nextSibling) header.insertBefore(el, h1.nextSibling);
-    else header.appendChild(el);
+    slot.appendChild(el);
   }
   if (activeSnapshotId && activeSnapshotName) {
     el.innerHTML = `<span class="snap-dot">●</span> <span class="snap-label">Editando:</span> <strong>${activeSnapshotName}</strong>`;

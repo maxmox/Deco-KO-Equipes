@@ -17,15 +17,18 @@
     </div>
   </div>
   <div class="header">
-    <h1>🏗️ <span>DECO-KO</span> — Controle de Equipes</h1>
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Buscar por nome ou função...">
+    <div class="header-row1">
+      <h1>🏗️ <span>DECO-KO</span> — Controle de Equipes</h1>
+      <div id="snapshotIndicatorSlot"></div>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Buscar por nome ou função...">
+      </div>
+      <div class="stats">
+        <span id="statAllocated">Alocados: 0/141</span>
+        <span id="statDuplicates">✅ Sem duplicidades</span>
+      </div>
     </div>
-    <div class="stats">
-      <span id="statAllocated">Alocados: 0/141</span>
-      <span id="statDuplicates">✅ Sem duplicidades</span>
-    </div>
-    <div class="header-actions">
+    <div class="header-row2">
       <button class="btn" onclick="openHistoryModal()">📋 Planejamentos</button>
       <button class="btn" onclick="openDaySummary()">📊 Resumo do Dia</button>
       <button class="btn" onclick="exportState()">💾 Relatório JSON</button>
