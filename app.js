@@ -520,6 +520,57 @@ function mkTeamCol(team, wtMap) {
   filterInput.addEventListener('input', () => filterColumn(col, filterInput.value));
   col.appendChild(filterWrap);
 
+  // Team info panel (turno, meta, obs)
+  const teamInfo = appState.teamInfo?.[team.id] || {};
+  const infoPanel = document.createElement('div');
+  infoPanel.className = 'team-info-panel';
+  infoPanel.innerHTML = `
+    <div class="team-info-row">
+      <label>⏰ Turno</label>
+      <select class="team-info-select" data-field="turno" data-team="${team.id}">
+        <option value="">— Selecionar —</option>
+        <option value="06:00–12:00" ${teamInfo.turno === '06:00–12:00' ? 'selected' : ''}>06:00 – 12:00</option>
+        <option value="07:00–11:30 / 13:00–17:00" ${teamInfo.turno === '07:00–11:30 / 13:00–17:00' ? 'selected' : ''}>07:00–11:30 / 13:00–17:00</option>
+        <option value="12:00–18:00" ${teamInfo.turno === '12:00–18:00' ? 'selected' : ''}>12:00 – 18:00</option>
+        <option value="18:00–06:00" ${teamInfo.turno === '18:00–06:00' ? 'selected' : ''}>18:00 – 06:00 (Noturno)</option>
+        <option value="integral" ${teamInfo.turno === 'integral' ? 'selected' : ''}>Integral</option>
+        <option value="custom" ${teamInfo.turno === 'custom' ? 'selected' : ''}>Personalizado...</option>
+      </select>
+    </div>
+    ${teamInfo.turno === 'custom' ? `<div class="team-info-row"><label></label><input type="text" class="team-info-input" data-field="turnoCustom" data-team="${team.id}" value="${teamInfo.turnoCustom || ''}" placeholder="Ex: 05:30–14:00"></div>` : ''}
+    <div class="team-info-row">
+      <label>🎯 Meta</label>
+      <input type="text" class="team-info-input" data-field="meta" data-team="${team.id}" value="${teamInfo.meta || ''}" placeholder="Ex: 50m de canaleta (opcional)">
+    </div>
+    <div class="team-info-row">
+      <label>📝 Obs</label>
+      <input type="text" class="team-info-input" data-field="obs" data-team="${team.id}" value="${teamInfo.obs || ''}" placeholder="Observação da equipe...">
+    </div>`;
+  col.appendChild(infoPanel);
+
+  // Bind events for info panel
+  infoPanel.querySelectorAll('.team-info-select').forEach(sel => {
+    sel.addEventListener('change', () => {
+      if (!appState.teamInfo) appState.teamInfo = {};
+      if (!appState.teamInfo[team.id]) appState.teamInfo[team.id] = {};
+      appState.teamInfo[team.id].turno = sel.value;
+      if (sel.value !== 'custom') delete appState.teamInfo[team.id].turnoCustom;
+      save(); renderAll();
+    });
+  });
+  infoPanel.querySelectorAll('.team-info-input').forEach(inp => {
+    let debounceTimer;
+    inp.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        if (!appState.teamInfo) appState.teamInfo = {};
+        if (!appState.teamInfo[team.id]) appState.teamInfo[team.id] = {};
+        appState.teamInfo[team.id][inp.dataset.field] = inp.value;
+        save();
+      }, 500);
+    });
+  });
+
   const body = document.createElement('div'); body.className = 'column-body';
 
   team.subgrupos.forEach((sg, si) => {
@@ -931,6 +982,110 @@ function openHistoryModal() {
   });
 
   setTimeout(() => document.getElementById('snapName').focus(), 100);
+}
+
+function openDaySummary() {
+  document.querySelectorAll('.modal-overlay').forEach(m => m.remove());
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.addEventListener('click', ev => { if (ev.target === overlay) overlay.remove(); });
+
+  const today = new Date().toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long', year:'numeric' });
+  const snapName = activeSnapshotName || 'Sem planejamento selecionado';
+
+  let rows = '';
+  (appState.teams || []).forEach(t => {
+    const info = appState.teamInfo?.[t.id] || {};
+    let filled = 0, total = 0;
+    t.subgrupos.forEach((sg, si) => {
+      const slots = getSlots(t.id, si);
+      total += slots.length;
+      filled += slots.filter(s => s.worker).length;
+    });
+    const turnoDisplay = info.turno === 'custom' ? (info.turnoCustom || '—') : (info.turno || '—');
+    rows += `<tr>
+      <td><span class="summary-dot" style="background:${t.cor}"></span>${t.nome}</td>
+      <td>${turnoDisplay}</td>
+      <td style="text-align:center;">${filled}/${total}</td>
+      <td>${info.meta || '—'}</td>
+      <td>${info.obs || '—'}</td>
+    </tr>`;
+  });
+
+  overlay.innerHTML = `
+    <div class="modal" style="width:900px;max-width:95vw;">
+      <div class="modal-header">
+        <h3>📊 Resumo do Dia</h3>
+        <button class="close-btn" onclick="this.closest('.modal-overlay').remove()">✕</button>
+      </div>
+      <div class="modal-body" style="padding:16px 20px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--text);">📅 ${today}</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px;">Planejamento: <strong style="color:var(--accent);">${snapName}</strong></div>
+          </div>
+          <button class="btn" onclick="printDaySummary()">🖨️ Imprimir</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="summary-table">
+            <thead>
+              <tr>
+                <th>Equipe</th>
+                <th>Turno</th>
+                <th style="text-align:center;">Efetivo</th>
+                <th>Meta</th>
+                <th>Observações</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      </div>
+    </div>`;
+
+  document.body.appendChild(overlay);
+}
+
+function printDaySummary() {
+  const today = new Date().toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long', year:'numeric' });
+  const snapName = activeSnapshotName || '';
+  let html = `<html><head><meta charset="utf-8"><title>Resumo do Dia - DECO-KO</title>
+    <style>
+      body { font-family: Arial, sans-serif; padding: 20px; }
+      h1 { font-size: 18px; text-align: center; margin-bottom: 4px; }
+      .sub { text-align: center; font-size: 12px; color: #666; margin-bottom: 16px; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { padding: 8px 10px; border: 1px solid #ddd; text-align: left; font-size: 12px; }
+      th { background: #f1f5f9; font-weight: bold; }
+      .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+      @media print { body { padding: 0; } }
+    </style>
+  </head><body>
+    <h1>Resumo do Dia — Missão DECO-KO</h1>
+    <div class="sub">${today}${snapName ? ' · Planejamento: ' + snapName : ''}</div>
+    <table><thead><tr><th>Equipe</th><th>Turno</th><th>Efetivo</th><th>Meta</th><th>Observações</th></tr></thead><tbody>`;
+  
+  (appState.teams || []).forEach(t => {
+    const info = appState.teamInfo?.[t.id] || {};
+    let filled = 0, total = 0;
+    t.subgrupos.forEach((sg, si) => {
+      const slots = getSlots(t.id, si);
+      total += slots.length;
+      filled += slots.filter(s => s.worker).length;
+    });
+    const turno = info.turno === 'custom' ? (info.turnoCustom || '—') : (info.turno || '—');
+    html += `<tr>
+      <td><span class="dot" style="background:${t.cor}"></span>${t.nome}</td>
+      <td>${turno}</td><td style="text-align:center;">${filled}/${total}</td>
+      <td>${info.meta || '—'}</td><td>${info.obs || '—'}</td>
+    </tr>`;
+  });
+  html += '</tbody></table></body></html>';
+  const w = window.open('', '_blank');
+  w.document.write(html);
+  w.document.close();
+  w.focus();
+  setTimeout(() => w.print(), 300);
 }
 
 document.addEventListener('DOMContentLoaded', init);
