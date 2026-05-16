@@ -4,6 +4,8 @@
 const STATE_KEY = 'deco-ko-state-v6';
 const EDITS_KEY = 'deco-ko-edits-v1';
 let appState = {}; // { slots: {teamId:{sgIdx:[{label,worker}]}}, edits:{} }
+let activeSnapshotId = null;
+let activeSnapshotName = '';
 
 let db = null;
 try {
@@ -34,6 +36,20 @@ function init() {
   renderAll();
 
   if (db) {
+    // Escuta o snapshot ativo
+    db.ref('activeSnapshotId').on('value', snap => {
+      activeSnapshotId = snap.val();
+      // Busca o nome do snapshot ativo
+      if (activeSnapshotId) {
+        const h = getHistory();
+        const s = h.find(x => x.id == activeSnapshotId);
+        activeSnapshotName = s ? s.name : '';
+      } else {
+        activeSnapshotName = '';
+      }
+      updateSnapshotIndicator();
+    });
+
     db.ref('appState').on('value', (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -51,6 +67,12 @@ function init() {
 
     db.ref('history').on('value', snap => {
       appHistory = snap.val() || [];
+      // Atualiza o nome se mudou
+      if (activeSnapshotId) {
+        const s = appHistory.find(x => x.id == activeSnapshotId);
+        activeSnapshotName = s ? s.name : '';
+        updateSnapshotIndicator();
+      }
       const modal = document.querySelector('.history-modal');
       if (modal) {
         const parent = modal.parentElement;
@@ -107,8 +129,22 @@ function initializeDefaultState() {
 }
 
 function save() { 
-  if (appState && appState.slots) {
+  if (appState && appState.slots && db) {
     db.ref('appState').set(appState);
+    // Auto-salva no snapshot ativo
+    if (activeSnapshotId) {
+      const h = getHistory();
+      const idx = h.findIndex(s => s.id == activeSnapshotId);
+      if (idx !== -1) {
+        h[idx].slots = JSON.parse(JSON.stringify(appState.slots));
+        h[idx].edits = JSON.parse(JSON.stringify(appState.edits));
+        h[idx].date = new Date().toISOString();
+        // Atualiza stats
+        const wtMap = getWorkerTeamMap();
+        h[idx].stats.alloc = Object.keys(wtMap).length;
+        saveHistory(h);
+      }
+    }
   }
 }
 function saveEdits() { save(); }
@@ -713,7 +749,32 @@ function getHistory() {
   return appHistory;
 }
 function saveHistory(h) { 
-  db.ref('history').set(h); 
+  if (db) db.ref('history').set(h); 
+}
+
+function updateSnapshotIndicator() {
+  let el = document.getElementById('snapshotIndicator');
+  if (!el) {
+    // Cria o indicador no header
+    const header = document.querySelector('.header');
+    if (!header) return;
+    el = document.createElement('div');
+    el.id = 'snapshotIndicator';
+    el.className = 'snapshot-indicator';
+    // Insere após o h1
+    const h1 = header.querySelector('h1');
+    if (h1 && h1.nextSibling) header.insertBefore(el, h1.nextSibling);
+    else header.appendChild(el);
+  }
+  if (activeSnapshotId && activeSnapshotName) {
+    el.innerHTML = `<span class="snap-dot">●</span> <span class="snap-label">Editando:</span> <strong>${activeSnapshotName}</strong>`;
+    el.style.display = 'flex';
+    el.title = 'Todas as alterações são salvas automaticamente neste planejamento';
+  } else {
+    el.innerHTML = `<span class="snap-dot off">●</span> <span class="snap-label">Nenhum planejamento selecionado</span>`;
+    el.style.display = 'flex';
+    el.title = 'Abra o Histórico e selecione um planejamento para auto-salvar';
+  }
 }
 
 function saveSnapshot(name) {
@@ -721,42 +782,79 @@ function saveSnapshot(name) {
   const wtMap = getWorkerTeamMap();
   const alloc = Object.keys(wtMap).length;
   let filled = 0, total = 0;
-  TEAMS.forEach(t => t.subgrupos.forEach((sg, si) => {
+  (appState.teams || TEAMS).forEach(t => t.subgrupos.forEach((sg, si) => {
     const slots = getSlots(t.id, si);
     total += slots.length;
     filled += slots.filter(s => s.worker).length;
   }));
+  const newId = Date.now();
   h.unshift({
-    id: Date.now(),
+    id: newId,
     name: name,
     date: new Date().toISOString(),
     slots: JSON.parse(JSON.stringify(appState.slots)),
     edits: JSON.parse(JSON.stringify(appState.edits)),
     stats: { alloc, filled, total, workers: WORKERS.length }
   });
-  if (h.length > 50) h.length = 50; // max 50 snapshots
+  if (h.length > 50) h.length = 50;
   saveHistory(h);
+  // Ativa o novo snapshot automaticamente
+  selectSnapshot(newId, name);
 }
 
-function restoreSnapshot(id) {
+function selectSnapshot(id, skipLoad) {
   const h = getHistory();
-  const snap = h.find(s => s.id === id);
+  const snap = h.find(s => s.id == id);
   if (!snap) return;
-  if (!confirm(`Restaurar "${snap.name}"? O estado atual será substituído.`)) return;
-  appState.slots = JSON.parse(JSON.stringify(snap.slots));
-  appState.edits = JSON.parse(JSON.stringify(snap.edits));
-  save(); saveEdits(); renderAll();
+  
+  // Carrega os dados do snapshot
+  if (!skipLoad) {
+    appState.slots = JSON.parse(JSON.stringify(snap.slots));
+    appState.edits = JSON.parse(JSON.stringify(snap.edits || {}));
+    if (db) db.ref('appState').set(appState);
+    renderAll();
+  }
+
+  // Define como ativo
+  activeSnapshotId = snap.id;
+  activeSnapshotName = snap.name;
+  if (db) db.ref('activeSnapshotId').set(snap.id);
+  updateSnapshotIndicator();
+  
+  // Fecha modais
   document.querySelectorAll('.modal-overlay').forEach(m => m.remove());
 }
 
 function deleteSnapshot(id) {
   const h = getHistory();
-  const idx = h.findIndex(s => s.id === id);
+  const idx = h.findIndex(s => s.id == id);
   if (idx === -1) return;
-  if (!confirm(`Excluir snapshot "${h[idx].name}"?`)) return;
+  if (!confirm(`Excluir planejamento "${h[idx].name}"?`)) return;
+  // Se estiver deletando o ativo, desativa
+  if (activeSnapshotId == id) {
+    activeSnapshotId = null;
+    activeSnapshotName = '';
+    if (db) db.ref('activeSnapshotId').remove();
+    updateSnapshotIndicator();
+  }
   h.splice(idx, 1);
   saveHistory(h);
-  openHistoryModal(); // refresh
+  openHistoryModal();
+}
+
+function renameSnapshot(id) {
+  const h = getHistory();
+  const snap = h.find(s => s.id == id);
+  if (!snap) return;
+  const newName = prompt('Novo nome:', snap.name);
+  if (!newName || !newName.trim()) return;
+  snap.name = newName.trim();
+  saveHistory(h);
+  if (activeSnapshotId == id) {
+    activeSnapshotName = snap.name;
+    updateSnapshotIndicator();
+  }
+  openHistoryModal();
 }
 
 function openHistoryModal() {
@@ -768,43 +866,47 @@ function openHistoryModal() {
 
   let listHtml = '';
   if (history.length === 0) {
-    listHtml = '<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px;">Nenhum snapshot salvo ainda.<br>Salve o estado atual para criar o primeiro registro.</div>';
+    listHtml = '<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px;">Nenhum planejamento salvo ainda.<br>Crie o primeiro para começar a trabalhar.</div>';
   } else {
     listHtml = history.map(s => {
       const d = new Date(s.date);
       const dateStr = d.toLocaleDateString('pt-BR', {day:'2-digit',month:'2-digit',year:'numeric'});
       const timeStr = d.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'});
       const stats = s.stats || {};
-      return `<div class="history-item">
+      const isActive = (activeSnapshotId == s.id);
+      return `<div class="history-item ${isActive ? 'history-active' : ''}">
         <div class="history-info">
-          <div class="history-name">${s.name}</div>
+          <div class="history-name">${isActive ? '🟢 ' : ''}${s.name}${isActive ? ' <span style="font-size:10px;color:var(--accent);font-weight:400;">(editando agora)</span>' : ''}</div>
           <div class="history-meta">📅 ${dateStr} às ${timeStr} · 👥 ${stats.alloc || '?'}/${stats.workers || '?'} alocados · ${stats.filled || '?'}/${stats.total || '?'} vagas</div>
         </div>
         <div class="history-actions">
-          <button class="btn-hist btn-restore" data-id="${s.id}">↩️ Restaurar</button>
-          <button class="btn-hist btn-del" data-id="${s.id}">🗑</button>
+          ${isActive 
+            ? '<button class="btn-hist btn-active-label" disabled>✅ Ativo</button>' 
+            : `<button class="btn-hist btn-select" data-id="${s.id}">📂 Selecionar</button>`}
+          <button class="btn-hist btn-rename" data-id="${s.id}" title="Renomear">✏️</button>
+          <button class="btn-hist btn-del" data-id="${s.id}" title="Excluir">🗑</button>
         </div>
       </div>`;
     }).join('');
   }
 
   overlay.innerHTML = `
-    <div class="modal" style="width:550px;">
+    <div class="modal" style="width:580px;">
       <div class="modal-header">
-        <h3>📋 Histórico de Equipes</h3>
+        <h3>📋 Planejamentos</h3>
         <button class="close-btn" onclick="this.closest('.modal-overlay').remove()">✕</button>
       </div>
       <div class="modal-body" style="padding:12px 20px;">
         <div class="field">
-          <label>Salvar estado atual</label>
+          <label>Criar novo planejamento</label>
           <div style="display:flex;gap:8px;">
-            <input type="text" id="snapName" placeholder="Ex: Dia 1, Pré-chuva, Config final..." style="flex:1;">
-            <button class="btn-save" id="btnSnap" style="white-space:nowrap;">📸 Salvar</button>
+            <input type="text" id="snapName" placeholder="Ex: Porto Dia 1, Pré-chuva, Config final..." style="flex:1;">
+            <button class="btn-save" id="btnSnap" style="white-space:nowrap;">➕ Criar</button>
           </div>
-          <div class="hint">Cria um snapshot que pode ser restaurado depois</div>
+          <div class="hint">Cria um novo planejamento a partir do estado atual e o seleciona para edição</div>
         </div>
         <div style="margin-top:12px;">
-          <label style="font-size:10px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;">Snapshots salvos (${history.length})</label>
+          <label style="font-size:10px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;">Planejamentos salvos (${history.length})</label>
           <div class="history-list" style="margin-top:8px;max-height:400px;overflow-y:auto;">${listHtml}</div>
         </div>
       </div>
@@ -814,13 +916,15 @@ function openHistoryModal() {
 
   document.getElementById('btnSnap').addEventListener('click', () => {
     const name = document.getElementById('snapName').value.trim();
-    if (!name) { alert('Dê um nome ao snapshot'); return; }
+    if (!name) { alert('Dê um nome ao planejamento'); return; }
     saveSnapshot(name);
-    openHistoryModal(); // refresh modal
   });
 
-  overlay.querySelectorAll('.btn-restore').forEach(b => {
-    b.addEventListener('click', () => restoreSnapshot(parseInt(b.dataset.id)));
+  overlay.querySelectorAll('.btn-select').forEach(b => {
+    b.addEventListener('click', () => selectSnapshot(parseInt(b.dataset.id)));
+  });
+  overlay.querySelectorAll('.btn-rename').forEach(b => {
+    b.addEventListener('click', () => renameSnapshot(parseInt(b.dataset.id)));
   });
   overlay.querySelectorAll('.btn-del').forEach(b => {
     b.addEventListener('click', () => deleteSnapshot(parseInt(b.dataset.id)));
