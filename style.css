@@ -224,9 +224,68 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
 .history-item {
   display:flex; align-items:center; gap:10px; padding:10px;
   border:1px solid var(--border); border-radius:8px; margin-bottom:6px;
-  background:var(--bg); transition:border-color 0.15s;
+  background:var(--bg); transition:  border-radius: 4px;
 }
-.history-item:hover { border-color:var(--accent); }
+.history-modal h3 { margin-bottom:10px; font-size:14px; color:var(--primary); }
+.history-modal ul { list-style:none; padding:0; margin:0; max-height:400px; overflow-y:auto; }
+.history-modal li { padding:10px; border-bottom:1px solid var(--border); font-size:12px; }
+.history-modal li:last-child { border:none; }
+.history-time { font-weight:bold; color:var(--text); margin-right:8px; }
+.history-action { color:var(--text2); }
+
+/* ---- LOGIN SCREEN ---- */
+#loginOverlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--bg-body);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-box {
+  background: var(--bg);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.login-box h2 {
+  margin-bottom: 20px;
+  color: var(--primary);
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.login-box button:hover {
+  background: #1d4ed8;
+}
+.login-error {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 10px;
+  display: none;
+}
 .history-info { flex:1; min-width:0; }
 .history-name { font-size:13px; font-weight:600; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .history-meta { font-size:10px; color:var(--text2); margin-top:2px; }

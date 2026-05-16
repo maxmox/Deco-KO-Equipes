@@ -7,6 +7,15 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="loginOverlay">
+    <div class="login-box">
+      <h2>DECO-KO Login</h2>
+      <input type="text" id="loginUser" placeholder="Usuário">
+      <input type="password" id="loginPass" placeholder="Senha" onkeypress="if(event.key === 'Enter') checkLogin()">
+      <button onclick="checkLogin()">Entrar</button>
+      <div id="loginError" class="login-error">Credenciais incorretas!</div>
+    </div>
+  </div>
   <div class="header">
     <h1>🏗️ <span>DECO-KO</span> — Controle de Equipes</h1>
     <div class="search-box">

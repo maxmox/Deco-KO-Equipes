@@ -6,11 +6,28 @@ const EDITS_KEY = 'deco-ko-edits-v1';
 let appState = {}; // { slots: {teamId:{sgIdx:[{label,worker}]}}, edits:{} }
 
 function init() {
+  if (sessionStorage.getItem('decoko_auth') !== 'true') {
+    document.getElementById('loginOverlay').style.display = 'flex';
+  } else {
+    document.getElementById('loginOverlay').style.display = 'none';
+  }
   loadAppState();
   renderAll();
   document.getElementById('searchInput').addEventListener('input', onSearch);
   const filterSel = document.getElementById('poolFilterSelect');
   if (filterSel) filterSel.addEventListener('change', () => renderPool(getWorkerTeamMap()));
+}
+
+function checkLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  if (u === 'deco-ko' && p === 'comara123') {
+    sessionStorage.setItem('decoko_auth', 'true');
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('loginError').style.display = 'none';
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
 }
 
 // ---- PERSISTENCE ----
