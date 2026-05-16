@@ -8,6 +8,7 @@ let appState = {}; // { slots: {teamId:{sgIdx:[{label,worker}]}}, edits:{} }
 const firebaseConfig = {
   apiKey: "AIzaSyCHcYzXafUg8rXiUgzGYh2dEqDTPqamnFA",
   authDomain: "decoko-6a92f.firebaseapp.com",
+  databaseURL: "https://decoko-6a92f-default-rtdb.firebaseio.com",
   projectId: "decoko-6a92f",
   storageBucket: "decoko-6a92f.firebasestorage.app",
   messagingSenderId: "168414348142",
@@ -30,6 +31,10 @@ function init() {
       initializeDefaultState();
       save(); // Write default to DB
     }
+    renderAll();
+  }, (error) => {
+    alert("Erro ao conectar no Firebase (Banco de Dados): " + error.message + "\n\nO sistema vai carregar offline com o último backup.");
+    initializeDefaultState();
     renderAll();
   });
 
