@@ -97,6 +97,12 @@ function checkLogin() {
   const p = document.getElementById('loginPass').value;
   if (u === 'deco-ko' && p === 'comara123') {
     sessionStorage.setItem('decoko_auth', 'true');
+    sessionStorage.setItem('decoko_readonly', 'false');
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('loginError').style.display = 'none';
+  } else if (u === 'visualizar' && p === 'comara123') {
+    sessionStorage.setItem('decoko_auth', 'true');
+    sessionStorage.setItem('decoko_readonly', 'true');
     document.getElementById('loginOverlay').style.display = 'none';
     document.getElementById('loginError').style.display = 'none';
   } else {
@@ -129,6 +135,7 @@ function initializeDefaultState() {
 }
 
 function save() { 
+  if (sessionStorage.getItem('decoko_readonly') === 'true') return;
   if (appState && appState.slots && db) {
     db.ref('appState').set(appState);
     // Auto-salva no snapshot ativo
