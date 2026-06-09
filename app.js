@@ -1,7 +1,7 @@
 /* DECO-KO — Controle de Equipes v6
    Slots fully managed in localStorage: add, remove, reorder */
 
-const selectedPaa = sessionStorage.getItem('decoko_paa') || 'maio';
+var selectedPaa = sessionStorage.getItem('decoko_paa') || 'maio';
 const STATE_KEY = selectedPaa === 'junho' ? 'deco-ko-state-v6-junho' : 'deco-ko-state-v6';
 const EDITS_KEY = selectedPaa === 'junho' ? 'deco-ko-edits-v1-junho' : 'deco-ko-edits-v1';
 let appState = {}; // { slots: {teamId:{sgIdx:[{label,worker}]}}, edits:{} }

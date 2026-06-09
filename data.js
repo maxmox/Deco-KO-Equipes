@@ -218,7 +218,7 @@ const DEFAULT_STATE_JUNHO = {
 };
 
 // Determina qual conjunto expor dinamicamente baseado na sessão
-const selectedPaa = sessionStorage.getItem('decoko_paa') || 'maio';
+var selectedPaa = sessionStorage.getItem('decoko_paa') || 'maio';
 const WORKERS = selectedPaa === 'junho' ? WORKERS_JUNHO : WORKERS_MAIO;
 const TEAMS = selectedPaa === 'junho' ? TEAMS_JUNHO : TEAMS_MAIO;
 const DEFAULT_STATE = selectedPaa === 'junho' ? DEFAULT_STATE_JUNHO : DEFAULT_STATE_MAIO;
