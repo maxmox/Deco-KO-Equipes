@@ -1,11 +1,19 @@
 /* DECO-KO — Controle de Equipes v6
    Slots fully managed in localStorage: add, remove, reorder */
 
-const STATE_KEY = 'deco-ko-state-v6';
-const EDITS_KEY = 'deco-ko-edits-v1';
+const selectedPaa = sessionStorage.getItem('decoko_paa') || 'maio';
+const STATE_KEY = selectedPaa === 'junho' ? 'deco-ko-state-v6-junho' : 'deco-ko-state-v6';
+const EDITS_KEY = selectedPaa === 'junho' ? 'deco-ko-edits-v1-junho' : 'deco-ko-edits-v1';
 let appState = {}; // { slots: {teamId:{sgIdx:[{label,worker}]}}, edits:{} }
 let activeSnapshotId = null;
 let activeSnapshotName = '';
+
+// Firebase Paths
+const DB_PATHS = {
+  appState: selectedPaa === 'junho' ? 'appState_junho' : 'appState',
+  activeSnapshotId: selectedPaa === 'junho' ? 'activeSnapshotId_junho' : 'activeSnapshotId',
+  history: selectedPaa === 'junho' ? 'history_junho' : 'history'
+};
 
 let db = null;
 try {
@@ -31,13 +39,21 @@ function init() {
     document.getElementById('loginOverlay').style.display = 'none';
   }
   
+  // Badge do PAA no título
+  const titleEl = document.querySelector('.header h1');
+  if (titleEl) {
+    const labelText = selectedPaa === 'junho' ? 'PAA Junho' : 'PAA Maio';
+    const badgeClass = selectedPaa === 'junho' ? 'paa-badge junho' : 'paa-badge maio';
+    titleEl.innerHTML = `🏗️ <span>DECO-KO</span> — Controle de Equipes <span class="${badgeClass}">${labelText}</span>`;
+  }
+
   // Previne tela preta carregando o estado local/backup imediatamente
   initializeDefaultState();
   renderAll();
 
   if (db) {
     // Escuta o snapshot ativo
-    db.ref('activeSnapshotId').on('value', snap => {
+    db.ref(DB_PATHS.activeSnapshotId).on('value', snap => {
       activeSnapshotId = snap.val();
       // Busca o nome do snapshot ativo
       if (activeSnapshotId) {
@@ -50,7 +66,7 @@ function init() {
       updateSnapshotIndicator();
     });
 
-    db.ref('appState').on('value', (snapshot) => {
+    db.ref(DB_PATHS.appState).on('value', (snapshot) => {
       const data = snapshot.val();
       if (data) {
         appState = data;
@@ -65,7 +81,7 @@ function init() {
       console.warn("Erro ao conectar no Firebase:", error.message);
     });
 
-    db.ref('history').on('value', snap => {
+    db.ref(DB_PATHS.history).on('value', snap => {
       appHistory = snap.val() || [];
       // Atualiza o nome se mudou
       if (activeSnapshotId) {
@@ -98,13 +114,31 @@ function checkLogin() {
   if (u === 'deco-ko' && p === 'comara123') {
     sessionStorage.setItem('decoko_auth', 'true');
     sessionStorage.setItem('decoko_readonly', 'false');
+    sessionStorage.setItem('decoko_paa', 'maio');
     document.getElementById('loginOverlay').style.display = 'none';
     document.getElementById('loginError').style.display = 'none';
+    location.reload();
   } else if (u === 'visualizar' && p === 'comara123') {
     sessionStorage.setItem('decoko_auth', 'true');
     sessionStorage.setItem('decoko_readonly', 'true');
+    sessionStorage.setItem('decoko_paa', 'maio');
     document.getElementById('loginOverlay').style.display = 'none';
     document.getElementById('loginError').style.display = 'none';
+    location.reload();
+  } else if (u === 'deco-junho' && p === 'comara123') {
+    sessionStorage.setItem('decoko_auth', 'true');
+    sessionStorage.setItem('decoko_readonly', 'false');
+    sessionStorage.setItem('decoko_paa', 'junho');
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('loginError').style.display = 'none';
+    location.reload();
+  } else if (u === 'visualizar-junho' && p === 'comara123') {
+    sessionStorage.setItem('decoko_auth', 'true');
+    sessionStorage.setItem('decoko_readonly', 'true');
+    sessionStorage.setItem('decoko_paa', 'junho');
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('loginError').style.display = 'none';
+    location.reload();
   } else {
     document.getElementById('loginError').style.display = 'block';
   }
@@ -112,12 +146,7 @@ function checkLogin() {
 
 // ---- PERSISTENCE ----
 function initializeDefaultState() {
-  if (typeof DEFAULT_BACKUP !== 'undefined' && DEFAULT_BACKUP.appState) {
-    try { appState = JSON.parse(DEFAULT_BACKUP.appState); } catch(e) { appState = {}; }
-    if (DEFAULT_BACKUP.edits) {
-      try { appState.edits = JSON.parse(DEFAULT_BACKUP.edits); } catch(e) {}
-    }
-  } else {
+  if (selectedPaa === 'junho') {
     appState = { slots: {}, edits: {}, teams: JSON.parse(JSON.stringify(TEAMS)) };
     appState.teams.forEach(t => {
       appState.slots[t.id] = {};
@@ -128,6 +157,24 @@ function initializeDefaultState() {
         }));
       });
     });
+  } else {
+    if (typeof DEFAULT_BACKUP !== 'undefined' && DEFAULT_BACKUP.appState) {
+      try { appState = JSON.parse(DEFAULT_BACKUP.appState); } catch(e) { appState = {}; }
+      if (DEFAULT_BACKUP.edits) {
+        try { appState.edits = JSON.parse(DEFAULT_BACKUP.edits); } catch(e) {}
+      }
+    } else {
+      appState = { slots: {}, edits: {}, teams: JSON.parse(JSON.stringify(TEAMS)) };
+      appState.teams.forEach(t => {
+        appState.slots[t.id] = {};
+        t.subgrupos.forEach((sg, si) => {
+          appState.slots[t.id][si] = sg.slots.map((s, sli) => ({
+            label: s.label,
+            worker: DEFAULT_STATE[t.id]?.[String(si)]?.[sli] || null
+          }));
+        });
+      });
+    }
   }
   if (!appState.teams && typeof TEAMS !== 'undefined') appState.teams = JSON.parse(JSON.stringify(TEAMS));
   if (!appState.slots) appState.slots = {};
@@ -137,7 +184,7 @@ function initializeDefaultState() {
 function save() { 
   if (sessionStorage.getItem('decoko_readonly') === 'true') return;
   if (appState && appState.slots && db) {
-    db.ref('appState').set(appState);
+    db.ref(DB_PATHS.appState).set(appState);
     // Auto-salva no snapshot ativo
     if (activeSnapshotId) {
       const h = getHistory();
@@ -214,7 +261,7 @@ function importBackup(event) {
         if (!appState.slots) appState.slots = {};
         if (!appState.edits) appState.edits = {};
         
-        if (db) db.ref('appState').set(appState);
+        if (db) db.ref(DB_PATHS.appState).set(appState);
         alert('Backup importado com sucesso!');
         renderAll();
       } else {
@@ -848,7 +895,7 @@ function getHistory() {
   return appHistory;
 }
 function saveHistory(h) { 
-  if (db) db.ref('history').set(h); 
+  if (db) db.ref(DB_PATHS.history).set(h); 
 }
 
 function updateSnapshotIndicator() {
@@ -906,14 +953,14 @@ function selectSnapshot(id, skipLoad) {
   if (!skipLoad) {
     appState.slots = JSON.parse(JSON.stringify(snap.slots));
     appState.edits = JSON.parse(JSON.stringify(snap.edits || {}));
-    if (db) db.ref('appState').set(appState);
+    if (db) db.ref(DB_PATHS.appState).set(appState);
     renderAll();
   }
 
   // Define como ativo
   activeSnapshotId = snap.id;
   activeSnapshotName = snap.name;
-  if (db) db.ref('activeSnapshotId').set(snap.id);
+  if (db) db.ref(DB_PATHS.activeSnapshotId).set(snap.id);
   updateSnapshotIndicator();
   
   // Fecha modais
@@ -929,7 +976,7 @@ function deleteSnapshot(id) {
   if (activeSnapshotId == id) {
     activeSnapshotId = null;
     activeSnapshotName = '';
-    if (db) db.ref('activeSnapshotId').remove();
+    if (db) db.ref(DB_PATHS.activeSnapshotId).remove();
     updateSnapshotIndicator();
   }
   h.splice(idx, 1);
