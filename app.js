@@ -512,6 +512,20 @@ function renderAll() {
   renderPool(wtMap); renderTeams(wtMap); updateStats(wtMap);
 }
 
+function getMilitarRankPriority(nome) {
+  const n = nome.toUpperCase();
+  if (n.startsWith('MJ')) return 1;
+  if (n.startsWith('1T') || n.startsWith('2T') || n.startsWith('TEN')) return 2;
+  if (n.startsWith('SO')) return 3;
+  if (n.startsWith('1S')) return 4;
+  if (n.startsWith('2S')) return 5;
+  if (n.startsWith('3S')) return 6;
+  if (n.startsWith('CB')) return 7;
+  if (n.startsWith('S1')) return 8;
+  if (n.startsWith('S2')) return 9;
+  return 10;
+}
+
 function renderPool(wtMap) {
   const body = document.getElementById('poolBody'); body.innerHTML = '';
   const filterVal = document.getElementById('poolFilterSelect')?.value || 'todos';
@@ -528,7 +542,15 @@ function renderPool(wtMap) {
     h.textContent = `${title} (${sublist.length})`; body.appendChild(h);
     sublist.forEach(w => body.appendChild(mkCard(w, 'pool', null, null, wtMap)));
   };
-  add('🟢 Militares', list.filter(w => w.tipo === 'militar'));
+
+  const sortedMilitares = list.filter(w => w.tipo === 'militar').sort((a, b) => {
+    const pA = getMilitarRankPriority(a.nome);
+    const pB = getMilitarRankPriority(b.nome);
+    if (pA !== pB) return pA - pB;
+    return a.nome.localeCompare(b.nome);
+  });
+
+  add('🟢 Militares', sortedMilitares);
   add('🔵 Civis SPTF-KO', list.filter(w => w.subtipo === 'civil-ko'));
   add('🟠 Civis SPTF-BE', list.filter(w => w.subtipo === 'civil-be'));
 }
@@ -1177,6 +1199,15 @@ function printDaySummary() {
   w.document.close();
   w.focus();
   setTimeout(() => w.print(), 300);
+}
+
+function logout() {
+  if (confirm("Deseja realmente sair da sessão?")) {
+    sessionStorage.removeItem('decoko_auth');
+    sessionStorage.removeItem('decoko_readonly');
+    sessionStorage.removeItem('decoko_paa');
+    location.reload();
+  }
 }
 
 document.addEventListener('DOMContentLoaded', init);
