@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DECO-KO — Controle de Equipes</title>
   <link rel="stylesheet" href="style.css">
+  <script>
+    window.addEventListener('error', function(e) {
+      const errDiv = document.createElement('div');
+      errDiv.style.cssText = 'position:fixed;top:0;left:0;width:100%;background:#ef4444;color:#fff;padding:15px;z-index:999999;font-family:monospace;font-size:12px;white-space:pre-wrap;box-shadow:0 4px 10px rgba(0,0,0,0.5);';
+      errDiv.textContent = 'ERRO JS: ' + e.message + '\nArquivo: ' + e.filename + '\nLinha: ' + e.lineno + '\nStack: ' + (e.error ? e.error.stack : 'N/A');
+      document.body.appendChild(errDiv);
+    });
+  </script>
 </head>
 <body>
   <div id="loginOverlay" style="background: #0f1117; backdrop-filter: blur(10px);">
