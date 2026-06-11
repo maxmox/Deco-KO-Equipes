@@ -630,7 +630,7 @@ function mkTeamCol(team, wtMap) {
   // Filter input
   const filterWrap = document.createElement('div');
   filterWrap.className = 'column-filter';
-  filterWrap.innerHTML = `<input type="text" placeholder="Filtrar vagas..." data-team="${team.id}">`;
+  filterWrap.innerHTML = `<input type="text" id="filter-${team.id}" name="filter-${team.id}" placeholder="Filtrar vagas..." data-team="${team.id}" aria-label="Filtrar vagas da equipe ${team.nome}">`;
   const filterInput = filterWrap.querySelector('input');
   filterInput.addEventListener('input', () => filterColumn(col, filterInput.value));
   col.appendChild(filterWrap);
@@ -642,8 +642,8 @@ function mkTeamCol(team, wtMap) {
   infoPanel.className = 'team-info-panel';
   infoPanel.innerHTML = `
     <div class="team-info-row">
-      <label>⏰ Turno</label>
-      <select class="team-info-select" data-field="turno" data-team="${team.id}">
+      <label for="turno-${team.id}">⏰ Turno</label>
+      <select id="turno-${team.id}" name="turno-${team.id}" class="team-info-select" data-field="turno" data-team="${team.id}" aria-label="Turno da equipe ${team.nome}">
         <option value="07:00–12:00 / 13:00–16:00" ${currentTurno === '07:00–12:00 / 13:00–16:00' ? 'selected' : ''}>07:00–16:00 (Expediente)</option>
         <option value="07:00–12:00" ${currentTurno === '07:00–12:00' ? 'selected' : ''}>07:00–12:00 (Meio turno manhã)</option>
         <option value="13:00–18:00" ${currentTurno === '13:00–18:00' ? 'selected' : ''}>13:00–18:00 (Meio turno tarde)</option>
@@ -651,14 +651,14 @@ function mkTeamCol(team, wtMap) {
         <option value="custom" ${currentTurno === 'custom' ? 'selected' : ''}>Personalizado...</option>
       </select>
     </div>
-    ${currentTurno === 'custom' ? `<div class="team-info-row"><label></label><input type="text" class="team-info-input" data-field="turnoCustom" data-team="${team.id}" value="${teamInfo.turnoCustom || ''}" placeholder="Ex: 05:30–14:00"></div>` : ''}
+    ${currentTurno === 'custom' ? `<div class="team-info-row"><label for="turnoCustom-${team.id}">Personalizado</label><input type="text" id="turnoCustom-${team.id}" name="turnoCustom-${team.id}" class="team-info-input" data-field="turnoCustom" data-team="${team.id}" value="${teamInfo.turnoCustom || ''}" placeholder="Ex: 05:30–14:00" aria-label="Turno personalizado da equipe ${team.nome}"></div>` : ''}
     <div class="team-info-row">
-      <label>🎯 Meta</label>
-      <input type="text" class="team-info-input" data-field="meta" data-team="${team.id}" value="${teamInfo.meta || ''}" placeholder="Ex: 50m de canaleta (opcional)">
+      <label for="meta-${team.id}">🎯 Meta</label>
+      <input type="text" id="meta-${team.id}" name="meta-${team.id}" class="team-info-input" data-field="meta" data-team="${team.id}" value="${teamInfo.meta || ''}" placeholder="Ex: 50m de canaleta (opcional)" aria-label="Meta da equipe ${team.nome}">
     </div>
     <div class="team-info-row">
-      <label>📝 Obs</label>
-      <input type="text" class="team-info-input" data-field="obs" data-team="${team.id}" value="${teamInfo.obs || ''}" placeholder="Observação da equipe...">
+      <label for="obs-${team.id}">📝 Obs</label>
+      <input type="text" id="obs-${team.id}" name="obs-${team.id}" class="team-info-input" data-field="obs" data-team="${team.id}" value="${teamInfo.obs || ''}" placeholder="Observação da equipe..." aria-label="Observação da equipe ${team.nome}">
     </div>`;
   col.appendChild(infoPanel);
 
@@ -826,13 +826,13 @@ function openAddSlotModal(teamId, sgIdx, sgNome) {
       <div class="modal-header"><h3>➕ Nova Vaga</h3>
         <button class="close-btn" onclick="this.closest('.modal-overlay').remove()">✕</button></div>
       <div class="modal-body">
-        <div class="field"><label>Equipe</label><input type="text" class="readonly" value="${team.nome}" readonly></div>
-        <div class="field"><label>Subgrupo</label><input type="text" class="readonly" value="${sgNome}" readonly></div>
-        <div class="field"><label>Nome da função / vaga</label>
-          <input type="text" id="newSlotName" placeholder="Ex: Operador de Serra, Pedreiro...">
+        <div class="field"><label for="addSlotTeam">Equipe</label><input type="text" id="addSlotTeam" name="addSlotTeam" class="readonly" value="${team.nome}" readonly aria-label="Equipe"></div>
+        <div class="field"><label for="addSlotSubgroup">Subgrupo</label><input type="text" id="addSlotSubgroup" name="addSlotSubgroup" class="readonly" value="${sgNome}" readonly aria-label="Subgrupo"></div>
+        <div class="field"><label for="newSlotName">Nome da função / vaga</label>
+          <input type="text" id="newSlotName" name="newSlotName" placeholder="Ex: Operador de Serra, Pedreiro...">
           <div class="hint">Nome que aparecerá no slot</div></div>
-        <div class="field"><label>Quantidade</label>
-          <input type="number" id="newSlotQtd" value="1" min="1" max="20" style="width:80px;">
+        <div class="field"><label for="newSlotQtd">Quantidade</label>
+          <input type="number" id="newSlotQtd" name="newSlotQtd" value="1" min="1" max="20" style="width:80px;">
           <div class="hint">Quantas vagas criar</div></div>
       </div>
       <div class="modal-footer">
@@ -869,12 +869,12 @@ function openEditModal(workerId) {
         <h3>${w.nome}</h3>
         <button class="close-btn" onclick="this.closest('.modal-overlay').remove()">✕</button></div>
       <div class="modal-body">
-        <div class="field"><label>Nome completo</label><input type="text" class="readonly" value="${w.nomeCompleto}" readonly></div>
-        <div class="field"><label>Tipo</label><input type="text" class="readonly" value="${w.subtipo === 'militar' ? 'Militar' : w.subtipo === 'civil-ko' ? 'Civil SPTF-KO' : 'Civil SPTF-BE'}" readonly></div>
-        <div class="field"><label>Função (registro)</label><input type="text" class="readonly" value="${w.funcao}" readonly><div class="hint">Original — somente leitura</div></div>
-        <div class="field"><label>Função na missão</label><input type="text" id="editFuncao" value="${e.funcaoCustom || w.funcao}"><div class="hint">Exibida no card</div></div>
-        <div class="field"><label>Cargo / Posição</label><input type="text" id="editRole" value="${e.role || ''}" placeholder="Encarregado, Chefe..."><div class="hint">Destaque azul</div></div>
-        <div class="field"><label>Observações</label><textarea id="editDescricao" placeholder="Anotações...">${e.descricao || ''}</textarea></div>
+        <div class="field"><label for="editNome">Nome completo</label><input type="text" id="editNome" name="editNome" class="readonly" value="${w.nomeCompleto}" readonly aria-label="Nome completo"></div>
+        <div class="field"><label for="editTipo">Tipo</label><input type="text" id="editTipo" name="editTipo" class="readonly" value="${w.subtipo === 'militar' ? 'Militar' : w.subtipo === 'civil-ko' ? 'Civil SPTF-KO' : 'Civil SPTF-BE'}" readonly aria-label="Tipo de trabalhador"></div>
+        <div class="field"><label for="editFuncaoOriginal">Função (registro)</label><input type="text" id="editFuncaoOriginal" name="editFuncaoOriginal" class="readonly" value="${w.funcao}" readonly aria-label="Função original de registro"><div class="hint">Original — somente leitura</div></div>
+        <div class="field"><label for="editFuncao">Função na missão</label><input type="text" id="editFuncao" name="editFuncao" value="${e.funcaoCustom || w.funcao}" aria-label="Função na missão"><div class="hint">Exibida no card</div></div>
+        <div class="field"><label for="editRole">Cargo / Posição</label><input type="text" id="editRole" name="editRole" value="${e.role || ''}" placeholder="Encarregado, Chefe..." aria-label="Cargo ou posição"><div class="hint">Destaque azul</div></div>
+        <div class="field"><label for="editDescricao">Observações</label><textarea id="editDescricao" name="editDescricao" placeholder="Anotações..." aria-label="Observações">${e.descricao || ''}</textarea></div>
         <div class="field"><label>Equipes</label><div class="teams-list">${teamsHtml}</div></div>
       </div>
       <div class="modal-footer">
