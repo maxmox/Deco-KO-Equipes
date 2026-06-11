@@ -184,11 +184,14 @@ function initializeDefaultState() {
 function save() { 
   if (sessionStorage.getItem('decoko_readonly') === 'true') return;
   if (appState && appState.slots && db) {
+    console.log("[DEBUG] save - Gravando appState global no Firebase");
     db.ref(DB_PATHS.appState).set(appState);
     // Auto-salva no snapshot ativo
+    console.log("[DEBUG] save - activeSnapshotId:", activeSnapshotId);
     if (activeSnapshotId) {
       const h = getHistory();
       const idx = h.findIndex(s => s.id == activeSnapshotId);
+      console.log("[DEBUG] save - Encontrado índice do snapshot ativo no history:", idx);
       if (idx !== -1) {
         h[idx].slots = JSON.parse(JSON.stringify(appState.slots));
         h[idx].edits = JSON.parse(JSON.stringify(appState.edits));
@@ -196,7 +199,10 @@ function save() {
         // Atualiza stats
         const wtMap = getWorkerTeamMap();
         h[idx].stats.alloc = Object.keys(wtMap).length;
+        console.log("[DEBUG] save - Gravando history atualizado no Firebase, salvando no snap:", h[idx].name);
         saveHistory(h);
+      } else {
+        console.warn("[DEBUG] save - Snapshot ativo não encontrado no histórico!");
       }
     }
   }
@@ -952,6 +958,7 @@ function saveSnapshot(name) {
     filled += slots.filter(s => s.worker).length;
   }));
   const newId = Date.now();
+  console.log("[DEBUG] saveSnapshot - Criando novo snapshot:", { newId, name });
   h.unshift({
     id: newId,
     name: name,
@@ -969,10 +976,15 @@ function saveSnapshot(name) {
 function selectSnapshot(id, skipLoad) {
   const h = getHistory();
   const snap = h.find(s => s.id == id);
-  if (!snap) return;
+  console.log("[DEBUG] selectSnapshot - Buscando ID:", id, "Encontrado snap:", snap);
+  if (!snap) {
+    console.warn("[DEBUG] selectSnapshot - Snapshot NÃO encontrado para o ID:", id);
+    return;
+  }
   
   // Carrega os dados do snapshot
   if (!skipLoad) {
+    console.log("[DEBUG] selectSnapshot - Carregando slots do snap:", snap.name);
     appState.slots = JSON.parse(JSON.stringify(snap.slots));
     appState.edits = JSON.parse(JSON.stringify(snap.edits || {}));
     if (db) db.ref(DB_PATHS.appState).set(appState);
@@ -984,6 +996,7 @@ function selectSnapshot(id, skipLoad) {
   activeSnapshotName = snap.name;
   if (db) db.ref(DB_PATHS.activeSnapshotId).set(snap.id);
   updateSnapshotIndicator();
+  console.log("[DEBUG] selectSnapshot - Definido ativo:", { activeSnapshotId, activeSnapshotName });
   
   // Fecha modais
   document.querySelectorAll('.modal-overlay').forEach(m => m.remove());
