@@ -962,8 +962,8 @@ function saveSnapshot(name) {
   });
   if (h.length > 50) h.length = 50;
   saveHistory(h);
-  // Ativa o novo snapshot automaticamente
-  selectSnapshot(newId, name);
+  // Ativa o novo snapshot automaticamente (carrega dados e envia para o Firebase)
+  selectSnapshot(newId);
 }
 
 function selectSnapshot(id, skipLoad) {
