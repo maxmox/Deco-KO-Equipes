@@ -195,6 +195,8 @@ function save() {
       if (idx !== -1) {
         h[idx].slots = JSON.parse(JSON.stringify(appState.slots));
         h[idx].edits = JSON.parse(JSON.stringify(appState.edits));
+        h[idx].teams = JSON.parse(JSON.stringify(appState.teams || TEAMS));
+        h[idx].teamInfo = JSON.parse(JSON.stringify(appState.teamInfo || {}));
         h[idx].date = new Date().toISOString();
         // Atualiza stats
         const wtMap = getWorkerTeamMap();
@@ -965,6 +967,8 @@ function saveSnapshot(name) {
     date: new Date().toISOString(),
     slots: JSON.parse(JSON.stringify(appState.slots)),
     edits: JSON.parse(JSON.stringify(appState.edits)),
+    teams: JSON.parse(JSON.stringify(appState.teams || TEAMS)),
+    teamInfo: JSON.parse(JSON.stringify(appState.teamInfo || {})),
     stats: { alloc, filled, total, workers: WORKERS.length }
   });
   if (h.length > 50) h.length = 50;
@@ -987,6 +991,8 @@ function selectSnapshot(id, skipLoad) {
     console.log("[DEBUG] selectSnapshot - Carregando slots do snap:", snap.name);
     appState.slots = JSON.parse(JSON.stringify(snap.slots));
     appState.edits = JSON.parse(JSON.stringify(snap.edits || {}));
+    appState.teams = JSON.parse(JSON.stringify(snap.teams || TEAMS));
+    appState.teamInfo = JSON.parse(JSON.stringify(snap.teamInfo || {}));
     if (db) db.ref(DB_PATHS.appState).set(appState);
     renderAll();
   }
