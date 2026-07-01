@@ -228,7 +228,9 @@ const PAA_JULHO_REMOVED = [
   "mil-49", "mil-50", "mil-51", "mil-52", "mil-53",
   "mil-54", "mil-55", "mil-56", "mil-57", "mil-58", "mil-59", "mil-60", "mil-61",
   "mil-18",
-  "civ-108", "civ-105"
+  "civ-108", "civ-105",
+  "civ-006", "civ-007", "civ-009", "civ-018", "civ-034", "civ-039", "civ-047", "civ-048", "civ-063", "civ-057",
+  "civ-072", "civ-077", "civ-078", "civ-079", "civ-097", "civ-075", "civ-040", "civ-037", "civ-029", "civ-008"
 ];
 
 // 30 trabalhadores que CHEGAM no PAA Julho
@@ -285,14 +287,14 @@ const DEFAULT_STATE_JULHO = {
       "0": "civ-014",
       "1": "civ-031",
       "2": "civ-102",
-      "3": "civ-077",
+      "3": null,
       "4": null,
       "5": "civ-058",
       "6": "civ-073",
       "7": "civ-083",
-      "8": "civ-078",
-      "9": "civ-047",
-      "10": "civ-079",
+      "8": null,
+      "9": null,
+      "10": null,
       "11": "civ-005",
       "12": "civ-026",
       "13": "civ-081",
@@ -307,7 +309,7 @@ const DEFAULT_STATE_JULHO = {
       "3": "civ-015",
       "4": "civ-002",
       "5": "civ-083",
-      "6": "civ-072",
+      "6": null,
       "7": "civ-065",
       "8": "civ-090",
       "9": "civ-099",
@@ -348,7 +350,7 @@ const DEFAULT_STATE_JULHO = {
       "6": "civ-055",
       "7": "civ-089",
       "8": "civ-013",
-      "9": "civ-037",
+      "9": null,
       "10": "civ-019"
     }
   },
@@ -356,7 +358,7 @@ const DEFAULT_STATE_JULHO = {
     "0": {
       "0": null,
       "1": null,
-      "2": "civ-048",
+      "2": null,
       "3": "civ-068",
       "4": "civ-092",
       "5": "civ-012"
@@ -379,7 +381,7 @@ const DEFAULT_STATE_JULHO = {
       "2": "civ-014",
       "3": "civ-069",
       "4": null,
-      "5": "civ-034",
+      "5": null,
       "6": "civ-101",
       "7": "civ-030",
       "8": "civ-088",
@@ -400,7 +402,7 @@ const DEFAULT_STATE_JULHO = {
       "1": null,
       "2": "civ-032",
       "3": "civ-071",
-      "4": "civ-075"
+      "4": null
     },
     "3": {
       "0": null,
@@ -423,9 +425,9 @@ const DEFAULT_STATE_JULHO = {
       "2": null,
       "3": null,
       "4": null,
-      "5": "civ-009",
+      "5": null,
       "6": null,
-      "7": "civ-006",
+      "7": null,
       "8": "civ-113"
     }
   }
