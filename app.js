@@ -70,6 +70,7 @@ function init() {
       const data = snapshot.val();
       if (data) {
         appState = data;
+        normalizeStateArrays(appState);
         if (!appState.teams && typeof TEAMS !== 'undefined') appState.teams = JSON.parse(JSON.stringify(TEAMS));
         if (!appState.slots) appState.slots = {};
         if (!appState.edits) appState.edits = {};
@@ -159,6 +160,39 @@ function checkLogin() {
 }
 
 // ---- PERSISTENCE ----
+function normalizeStateArrays(state) {
+  if (!state) return;
+  if (state.teams && !Array.isArray(state.teams)) {
+    state.teams = Object.values(state.teams);
+  }
+  if (state.teams) {
+    state.teams.forEach(t => {
+      if (t.subgrupos && !Array.isArray(t.subgrupos)) {
+        t.subgrupos = Object.values(t.subgrupos);
+      }
+      if (t.subgrupos) {
+        t.subgrupos.forEach(sg => {
+          if (sg.slots && !Array.isArray(sg.slots)) {
+            sg.slots = Object.values(sg.slots);
+          }
+        });
+      }
+    });
+  }
+  if (state.slots) {
+    Object.keys(state.slots).forEach(teamId => {
+      const teamSlots = state.slots[teamId];
+      if (teamSlots && typeof teamSlots === 'object') {
+        Object.keys(teamSlots).forEach(sgIdx => {
+          if (teamSlots[sgIdx] && !Array.isArray(teamSlots[sgIdx])) {
+            teamSlots[sgIdx] = Object.values(teamSlots[sgIdx]);
+          }
+        });
+      }
+    });
+  }
+}
+
 function initializeDefaultState() {
   if (selectedPaa === 'junho' || selectedPaa === 'julho') {
     appState = { slots: {}, edits: {}, teams: JSON.parse(JSON.stringify(TEAMS)) };
@@ -190,6 +224,7 @@ function initializeDefaultState() {
       });
     }
   }
+  normalizeStateArrays(appState);
   if (!appState.teams && typeof TEAMS !== 'undefined') appState.teams = JSON.parse(JSON.stringify(TEAMS));
   if (!appState.slots) appState.slots = {};
   if (!appState.edits) appState.edits = {};
@@ -282,6 +317,7 @@ function importBackup(event) {
       if (data.appState) {
         appState = JSON.parse(data.appState);
         if (data.edits) appState.edits = JSON.parse(data.edits);
+        normalizeStateArrays(appState);
         if (!appState.teams && typeof TEAMS !== 'undefined') appState.teams = JSON.parse(JSON.stringify(TEAMS));
         if (!appState.slots) appState.slots = {};
         if (!appState.edits) appState.edits = {};
@@ -1010,6 +1046,7 @@ function selectSnapshot(id, skipLoad) {
     appState.edits = JSON.parse(JSON.stringify(snap.edits || {}));
     appState.teams = JSON.parse(JSON.stringify(snap.teams || TEAMS));
     appState.teamInfo = JSON.parse(JSON.stringify(snap.teamInfo || {}));
+    normalizeStateArrays(appState);
     if (db) db.ref(DB_PATHS.appState).set(appState);
     renderAll();
   }
