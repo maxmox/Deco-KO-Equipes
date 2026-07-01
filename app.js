@@ -167,13 +167,21 @@ function normalizeStateArrays(state) {
   }
   if (state.teams) {
     state.teams.forEach(t => {
-      if (t.subgrupos && !Array.isArray(t.subgrupos)) {
-        t.subgrupos = Object.values(t.subgrupos);
-      }
-      if (t.subgrupos) {
+      if (t) {
+        if (!t.subgrupos) {
+          t.subgrupos = [];
+        }
+        if (!Array.isArray(t.subgrupos)) {
+          t.subgrupos = Object.values(t.subgrupos);
+        }
         t.subgrupos.forEach(sg => {
-          if (sg.slots && !Array.isArray(sg.slots)) {
-            sg.slots = Object.values(sg.slots);
+          if (sg) {
+            if (!sg.slots) {
+              sg.slots = [];
+            }
+            if (!Array.isArray(sg.slots)) {
+              sg.slots = Object.values(sg.slots);
+            }
           }
         });
       }
