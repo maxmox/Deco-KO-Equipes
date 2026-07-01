@@ -239,7 +239,10 @@ function resetState() {
   localStorage.removeItem(STATE_KEY);
   localStorage.removeItem(EDITS_KEY);
   appState = {};
-  loadAppState();
+  initializeDefaultState();
+  if (db) {
+    db.ref(DB_PATHS.appState).set(appState);
+  }
   renderAll();
 }
 
