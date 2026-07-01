@@ -217,8 +217,222 @@ const DEFAULT_STATE_JUNHO = {
   }
 };
 
+// =============================================
+// PAA JULHO
+// =============================================
+
+// IDs dos trabalhadores que SAEM no PAA Julho (32 IDs — pessoal que retorna de junho)
+const PAA_JULHO_REMOVED = [
+  "mil-32", "mil-33", "mil-34", "mil-35", "mil-36", "mil-37", "mil-38", "mil-39", "mil-40",
+  "mil-42", "mil-43", "mil-44", "mil-45", "mil-46", "mil-47", "mil-48",
+  "mil-49", "mil-50", "mil-51", "mil-52", "mil-53",
+  "mil-54", "mil-55", "mil-56", "mil-57", "mil-58", "mil-59", "mil-60", "mil-61",
+  "mil-18",
+  "civ-108", "civ-105"
+];
+
+// 30 trabalhadores que CHEGAM no PAA Julho
+const PAA_JULHO_ADDED = [
+  {"id": "mil-63", "nome": "MJ VICTOR", "nomeCompleto": "VICTOR GAMEIRO GUEDES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "CHEFE DE ENGENHARIA", "servico": "CHEFE GERAL"},
+  {"id": "mil-64", "nome": "1T EDUARDO", "nomeCompleto": "CARLOS EDUARDO DA SILVA MACEDO", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ADJUNTO DO CH DE ENGENHARIA", "servico": "ENG PLANEJADOR"},
+  {"id": "mil-65", "nome": "CB MONTEIRO", "nomeCompleto": "HERALDO WAGNER CONCEICAO MONTEIRO", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "AUXILIAR DE COMBLUB", "servico": "AUXILIAR DISTRIBUIÇÃO E CONTROLE DE COMBUSTÍVEIS"},
+  {"id": "mil-66", "nome": "CB SANTIAGO", "nomeCompleto": "JOAO PEDRO PAIXAO SANTIAGO", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "AUXILIAR DE SUPRIMENTO", "servico": "SUPRIMENTOS"},
+  {"id": "mil-67", "nome": "1S SCHOLZ", "nomeCompleto": "ALEXANDRE SCHOLZ", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ENCARREGADO DE SUPRIMENTO / COMBLUB", "servico": "ALMOXARIFADO"},
+  {"id": "mil-68", "nome": "CB R SOUZA", "nomeCompleto": "ROBERT MORAES DE SOUZA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ENCARREGADO DE OPERAÇÕES", "servico": "RECICLAGEM E TRILHOS"},
+  {"id": "mil-69", "nome": "CB DA SILVA", "nomeCompleto": "REGINALDO DA SILVA LOPES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "MOTORISTA CAT D/E", "servico": "MOTORISTA"},
+  {"id": "mil-70", "nome": "CB RODOLFO", "nomeCompleto": "RODOLFO DO NASCIMENTO CRUZ", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "MOTORISTA CAT D", "servico": "MOTORISTA"},
+  {"id": "mil-71", "nome": "SO GEILAN", "nomeCompleto": "GEILAN CHARLES RODRIGUES DA SILVA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ENCARREGADO DE OBRAS", "servico": "ENCARREGADO DE CONCRETAGEM"},
+  {"id": "mil-72", "nome": "CB SILVA", "nomeCompleto": "LAILTON PAIXÃO SILVA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ELETRICISTA", "servico": "ELETRICISTA"},
+  {"id": "mil-73", "nome": "1S CARDOSO", "nomeCompleto": "CARLOS EDUARDO CARDOSO DE OLIVEIRA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ENCARREGADO DA", "servico": "ADMINISTRATIVO"},
+  {"id": "mil-74", "nome": "CB SAMPAIO", "nomeCompleto": "VICTOR MANOEL SOUZA SAMPAIO", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "AUX ENC DA", "servico": "ADMINISTRATIVO"},
+  {"id": "mil-75", "nome": "CB BARREIRINHAS", "nomeCompleto": "VITOR HUGO BARATA BARREIRINHAS", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "AUX SEGURANÇA E DEFESA", "servico": "GUARDA"},
+  {"id": "mil-76", "nome": "SO FERREIRA", "nomeCompleto": "VALMIR AMADOR FERREIRA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "AUX SEGURANÇA E DEFESA", "servico": "GUARDA"},
+  {"id": "mil-77", "nome": "S1 LIMA SANTOS", "nomeCompleto": "RAFAEL CORREA LIMA SANTOS", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "AUX SEGURANÇA E DEFESA", "servico": "GUARDA"},
+  {"id": "mil-78", "nome": "CB ALESSANDRO", "nomeCompleto": "ALESSANDRO DA SILVA COSTA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "AUX SEGURANÇA E DEFESA", "servico": "GUARDA"},
+  {"id": "mil-79", "nome": "1T MAXIMILIANO", "nomeCompleto": "MAXIMILIANO CAVALCANTE DIAS SOUZA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ADJUNTO DO CHEFE DE ENGENHARIA", "servico": "ENG PLANEJADOR"},
+  {"id": "mil-80", "nome": "2S LUIS CLAÚDIO", "nomeCompleto": "LUIS CLAÚDIO COSTA DOS PRAZERES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "COZINHEIRO", "servico": "COZINHEIRO"},
+  {"id": "mil-81", "nome": "2S DIEGO SILVA", "nomeCompleto": "DIEGO RODRIGUES DA SILVA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "TOPÓGRAFO", "servico": "TRINCHEIRA DRENANTE, CORTE E SELAGEM, SINALIZAÇÃO E TERRAPLENAGEM"},
+  {"id": "mil-82", "nome": "3S LUANE ALVES", "nomeCompleto": "LUANE CAROLINE COSTA ALVES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ARRUMADORA", "servico": "ADMINISTRATIVO"},
+  {"id": "mil-83", "nome": "1S JOSIEL", "nomeCompleto": "JOSIEL MIRANDA ALVES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ENCARREGADO DE MANUTENÇÃO", "servico": "SUPERVISOR MANUTENÇÃO"},
+  {"id": "mil-84", "nome": "CB DAYVSON", "nomeCompleto": "DAYVSON NASCIMENTO CUNHA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "AUX DE MANUTENÇÃO", "servico": "AUXILIAR MECÂNICO"},
+  {"id": "mil-85", "nome": "CB HENRIQUE", "nomeCompleto": "CARLOS HENRIQUE DE CASTRO MORAES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "TORNEIRO MECÂNICO", "servico": "TORNEIRO MECÂNICO"},
+  {"id": "mil-86", "nome": "CB BRYAN", "nomeCompleto": "BRYAN FELIPE FEREIRA SANTOS", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "BORRACHEIRO", "servico": "BORRACHEIRO"},
+  {"id": "civ-114", "nome": "SPTF JOAS", "nomeCompleto": "JOAS ARAUJO MARINHO", "tipo": "civil", "subtipo": "civil-be", "posto": "SPTF-BE", "funcao": "ELETRICISTA DE AUTO", "servico": ""},
+  {"id": "civ-115", "nome": "SPTF CABRAL", "nomeCompleto": "OTNIEL DA ROCHA CABRAL", "tipo": "civil", "subtipo": "civil-be", "posto": "SPTF-BE", "funcao": "MECÂNICO", "servico": ""},
+  {"id": "mil-87", "nome": "CB G BRUNO", "nomeCompleto": "GUARDINO BRUNO FERREIRA SOARES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "MOTORISTA CAT D", "servico": "MOTORISTA"},
+  {"id": "mil-88", "nome": "1T POMPEU", "nomeCompleto": "SAMMY NASCIMENTO POMPEU", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "CHEFE DE LOGÍSTICA", "servico": "ENG MECÂNICO"},
+  {"id": "mil-89", "nome": "3S FRAGOSO", "nomeCompleto": "MATHEUS ALVES GUILHERME FRAGOSO", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "LABORATORISTA", "servico": "ENCARREGADO RECICLAGEM"},
+  {"id": "mil-90", "nome": "3S ERIBERTO", "nomeCompleto": "ERIBERTO PEREIRA GOMES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "LABORATORISTA", "servico": "ENCARREGADO CONTROLE TECNOLÓGICO DO CONCRETO"}
+];
+
+const WORKERS_JULHO = WORKERS_JUNHO.filter(w => !PAA_JULHO_REMOVED.includes(w.id)).concat(PAA_JULHO_ADDED);
+
+const TEAMS_JULHO = TEAMS_MAIO;
+
+// Estado inicial baseado no PAA Junho "dia 24/06", com trabalhadores removidos limpos (null)
+const DEFAULT_STATE_JULHO = {
+  "comando": {
+    "0": {
+      "0": null,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null
+    }
+  },
+  "cdc": {
+    "0": {
+      "0": "civ-014",
+      "1": "civ-031",
+      "2": "civ-102",
+      "3": "civ-077",
+      "4": null,
+      "5": "civ-058",
+      "6": "civ-073",
+      "7": "civ-083",
+      "8": "civ-078",
+      "9": "civ-047",
+      "10": "civ-079",
+      "11": "civ-005",
+      "12": "civ-026",
+      "13": "civ-081",
+      "14": "civ-022"
+    }
+  },
+  "concretagem": {
+    "0": {
+      "0": "mil-41",
+      "1": null,
+      "2": "civ-061",
+      "3": "civ-015",
+      "4": "civ-002",
+      "5": "civ-083",
+      "6": "civ-072",
+      "7": "civ-065",
+      "8": "civ-090",
+      "9": "civ-099",
+      "10": "civ-066",
+      "11": "civ-052",
+      "12": "civ-043",
+      "13": "civ-051",
+      "14": "civ-004",
+      "15": "civ-085",
+      "16": "civ-070",
+      "17": "civ-056"
+    }
+  },
+  "reciclagem": {
+    "0": {
+      "0": null,
+      "2": "civ-111",
+      "3": "civ-074",
+      "4": "civ-024",
+      "5": null,
+      "6": "civ-036",
+      "7": "civ-035",
+      "8": "civ-046",
+      "9": "civ-067",
+      "10": "civ-091",
+      "11": "civ-064",
+      "13": "civ-049"
+    }
+  },
+  "trilhos-rasga": {
+    "0": {
+      "0": null,
+      "1": "civ-050",
+      "2": "civ-021",
+      "3": "civ-087",
+      "4": "civ-045",
+      "5": "civ-017",
+      "6": "civ-055",
+      "7": "civ-089",
+      "8": "civ-013",
+      "9": "civ-037",
+      "10": "civ-019"
+    }
+  },
+  "topografia": {
+    "0": {
+      "0": null,
+      "1": null,
+      "2": "civ-048",
+      "3": "civ-068",
+      "4": "civ-092",
+      "5": "civ-012"
+    }
+  },
+  "trincheira": {
+    "0": {
+      "0": null
+    }
+  },
+  "corte-selagem": {
+    "0": {
+      "0": null
+    }
+  },
+  "manutencao": {
+    "0": {
+      "0": null,
+      "1": null,
+      "2": "civ-014",
+      "3": "civ-069",
+      "4": null,
+      "5": "civ-034",
+      "6": "civ-101",
+      "7": "civ-030",
+      "8": "civ-088",
+      "9": "civ-110"
+    }
+  },
+  "apoio": {
+    "0": {
+      "0": null,
+      "1": null
+    },
+    "1": {
+      "0": null,
+      "1": null
+    },
+    "2": {
+      "0": null,
+      "1": null,
+      "2": "civ-032",
+      "3": "civ-071",
+      "4": "civ-075"
+    },
+    "3": {
+      "0": null,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null
+    },
+    "4": {
+      "0": null,
+      "1": "mil-62",
+      "2": "civ-041",
+      "3": null
+    }
+  },
+  "motoristas": {
+    "0": {
+      "0": null,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": "civ-009",
+      "6": null,
+      "7": "civ-006",
+      "8": "civ-113"
+    }
+  }
+};
+
 // Determina qual conjunto expor dinamicamente baseado na sessão
 var selectedPaa = sessionStorage.getItem('decoko_paa') || 'maio';
-const WORKERS = selectedPaa === 'junho' ? WORKERS_JUNHO : WORKERS_MAIO;
-const TEAMS = selectedPaa === 'junho' ? TEAMS_JUNHO : TEAMS_MAIO;
-const DEFAULT_STATE = selectedPaa === 'junho' ? DEFAULT_STATE_JUNHO : DEFAULT_STATE_MAIO;
+const WORKERS = selectedPaa === 'julho' ? WORKERS_JULHO : selectedPaa === 'junho' ? WORKERS_JUNHO : WORKERS_MAIO;
+const TEAMS = selectedPaa === 'julho' ? TEAMS_JULHO : selectedPaa === 'junho' ? TEAMS_JUNHO : TEAMS_MAIO;
+const DEFAULT_STATE = selectedPaa === 'julho' ? DEFAULT_STATE_JULHO : selectedPaa === 'junho' ? DEFAULT_STATE_JUNHO : DEFAULT_STATE_MAIO;

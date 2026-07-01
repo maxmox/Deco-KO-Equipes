@@ -2,17 +2,17 @@
    Slots fully managed in localStorage: add, remove, reorder */
 
 var selectedPaa = sessionStorage.getItem('decoko_paa') || 'maio';
-const STATE_KEY = selectedPaa === 'junho' ? 'deco-ko-state-v6-junho' : 'deco-ko-state-v6';
-const EDITS_KEY = selectedPaa === 'junho' ? 'deco-ko-edits-v1-junho' : 'deco-ko-edits-v1';
+const STATE_KEY = selectedPaa === 'julho' ? 'deco-ko-state-v6-julho' : selectedPaa === 'junho' ? 'deco-ko-state-v6-junho' : 'deco-ko-state-v6';
+const EDITS_KEY = selectedPaa === 'julho' ? 'deco-ko-edits-v1-julho' : selectedPaa === 'junho' ? 'deco-ko-edits-v1-junho' : 'deco-ko-edits-v1';
 let appState = {}; // { slots: {teamId:{sgIdx:[{label,worker}]}}, edits:{} }
 let activeSnapshotId = null;
 let activeSnapshotName = '';
 
 // Firebase Paths
 const DB_PATHS = {
-  appState: selectedPaa === 'junho' ? 'appState_junho' : 'appState',
-  activeSnapshotId: selectedPaa === 'junho' ? 'activeSnapshotId_junho' : 'activeSnapshotId',
-  history: selectedPaa === 'junho' ? 'history_junho' : 'history'
+  appState: selectedPaa === 'julho' ? 'appState_julho' : selectedPaa === 'junho' ? 'appState_junho' : 'appState',
+  activeSnapshotId: selectedPaa === 'julho' ? 'activeSnapshotId_julho' : selectedPaa === 'junho' ? 'activeSnapshotId_junho' : 'activeSnapshotId',
+  history: selectedPaa === 'julho' ? 'history_julho' : selectedPaa === 'junho' ? 'history_junho' : 'history'
 };
 
 let db = null;
@@ -42,8 +42,8 @@ function init() {
   // Badge do PAA no título
   const titleEl = document.querySelector('.header h1');
   if (titleEl) {
-    const labelText = selectedPaa === 'junho' ? 'PAA Junho' : 'PAA Maio';
-    const badgeClass = selectedPaa === 'junho' ? 'paa-badge junho' : 'paa-badge maio';
+    const labelText = selectedPaa === 'julho' ? 'PAA Julho' : selectedPaa === 'junho' ? 'PAA Junho' : 'PAA Maio';
+    const badgeClass = selectedPaa === 'julho' ? 'paa-badge julho' : selectedPaa === 'junho' ? 'paa-badge junho' : 'paa-badge maio';
     titleEl.innerHTML = `🏗️ <span>DECO-KO</span> — Controle de Equipes <span class="${badgeClass}">${labelText}</span>`;
   }
 
@@ -139,6 +139,20 @@ function checkLogin() {
     document.getElementById('loginOverlay').style.display = 'none';
     document.getElementById('loginError').style.display = 'none';
     location.reload();
+  } else if (u === 'deco-julho' && p === 'comara123') {
+    sessionStorage.setItem('decoko_auth', 'true');
+    sessionStorage.setItem('decoko_readonly', 'false');
+    sessionStorage.setItem('decoko_paa', 'julho');
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('loginError').style.display = 'none';
+    location.reload();
+  } else if (u === 'visualizar-julho' && p === 'comara123') {
+    sessionStorage.setItem('decoko_auth', 'true');
+    sessionStorage.setItem('decoko_readonly', 'true');
+    sessionStorage.setItem('decoko_paa', 'julho');
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('loginError').style.display = 'none';
+    location.reload();
   } else {
     document.getElementById('loginError').style.display = 'block';
   }
@@ -146,7 +160,7 @@ function checkLogin() {
 
 // ---- PERSISTENCE ----
 function initializeDefaultState() {
-  if (selectedPaa === 'junho') {
+  if (selectedPaa === 'junho' || selectedPaa === 'julho') {
     appState = { slots: {}, edits: {}, teams: JSON.parse(JSON.stringify(TEAMS)) };
     appState.teams.forEach(t => {
       appState.slots[t.id] = {};

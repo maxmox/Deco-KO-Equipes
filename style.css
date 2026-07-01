@@ -384,3 +384,8 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
   color: #a855f7;
   border-color: rgba(168, 85, 247, 0.3);
 }
+.paa-badge.julho {
+  background: rgba(249, 115, 22, 0.15);
+  color: #f97316;
+  border-color: rgba(249, 115, 22, 0.3);
+}
