@@ -230,7 +230,8 @@ const PAA_JULHO_REMOVED = [
   "mil-18",
   "civ-108", "civ-105",
   "civ-006", "civ-007", "civ-009", "civ-018", "civ-034", "civ-039", "civ-047", "civ-048", "civ-063", "civ-057",
-  "civ-072", "civ-077", "civ-078", "civ-079", "civ-097", "civ-075", "civ-040", "civ-037", "civ-029", "civ-008"
+  "civ-072", "civ-077", "civ-078", "civ-079", "civ-097", "civ-075", "civ-040", "civ-037", "civ-029", "civ-008",
+  "civ-110"
 ];
 
 // 30 trabalhadores que CHEGAM no PAA Julho
@@ -264,7 +265,14 @@ const PAA_JULHO_ADDED = [
   {"id": "mil-87", "nome": "CB G BRUNO", "nomeCompleto": "GUARDINO BRUNO FERREIRA SOARES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "MOTORISTA CAT D", "servico": "MOTORISTA"},
   {"id": "mil-88", "nome": "1T POMPEU", "nomeCompleto": "SAMMY NASCIMENTO POMPEU", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "CHEFE DE LOGÍSTICA", "servico": "ENG MECÂNICO"},
   {"id": "mil-89", "nome": "3S FRAGOSO", "nomeCompleto": "MATHEUS ALVES GUILHERME FRAGOSO", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "LABORATORISTA", "servico": "ENCARREGADO RECICLAGEM"},
-  {"id": "mil-90", "nome": "3S ERIBERTO", "nomeCompleto": "ERIBERTO PEREIRA GOMES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "LABORATORISTA", "servico": "ENCARREGADO CONTROLE TECNOLÓGICO DO CONCRETO"}
+  {"id": "mil-90", "nome": "3S ERIBERTO", "nomeCompleto": "ERIBERTO PEREIRA GOMES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "LABORATORISTA", "servico": "ENCARREGADO CONTROLE TECNOLÓGICO DO CONCRETO"},
+  {"id": "civ-116", "nome": "SPTF JAMISSON", "nomeCompleto": "JAMISSON DE OLIVEIRA MONTEIRO", "tipo": "civil", "subtipo": "civil-be", "posto": "SPTF-BE", "funcao": "MOTORISTA DE CAMINHÃO CAT \"D\"", "servico": ""},
+  {"id": "civ-117", "nome": "SPPF AMARILDO", "nomeCompleto": "AMARILDO FERREIRA PENHA", "tipo": "civil", "subtipo": "civil-be", "posto": "SPPF-BE", "funcao": "OPERADOR DE MÁQUINAS", "servico": ""},
+  {"id": "civ-118", "nome": "Saymo Lima Dos Reis", "nomeCompleto": "Saymo Lima Dos Reis", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "MOTORISTA DE CAMINHÃO CAT \"D\"", "servico": ""},
+  {"id": "civ-119", "nome": "Jailson De Macedo", "nomeCompleto": "Jailson De Macedo", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "MOTORISTA DE CAMINHÃO CAT \"D\"", "servico": ""},
+  {"id": "civ-120", "nome": "Marcos Antonio Soares Graça", "nomeCompleto": "Marcos Antonio Soares Graça", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "MOTORISTA DE CAMINHÃO CAT \"D\"", "servico": ""},
+  {"id": "civ-121", "nome": "Elmir Da Silva Vasconcelos", "nomeCompleto": "Elmir Da Silva Vasconcelos", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "MOTORISTA DE CAMINHÃO CAT \"D\"", "servico": ""},
+  {"id": "civ-122", "nome": "Nildo Sevalho Ahuanare", "nomeCompleto": "Nildo Sevalho Ahuanare", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "CARPINTEIRO", "servico": ""}
 ];
 
 const WORKERS_JULHO = WORKERS_JUNHO.filter(w => !PAA_JULHO_REMOVED.includes(w.id)).concat(PAA_JULHO_ADDED);
@@ -385,7 +393,7 @@ const DEFAULT_STATE_JULHO = {
       "6": "civ-101",
       "7": "civ-030",
       "8": "civ-088",
-      "9": "civ-110"
+      "9": null
     }
   },
   "apoio": {
