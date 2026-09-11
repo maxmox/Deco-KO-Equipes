@@ -1,4 +1,4 @@
-// Auto-generated & Extended | Suporte a PAA Maio e PAA Junho
+// Auto-generated & Extended | Suporte a PAA Maio, Junho, Julho e Setembro
 
 const WORKERS_MAIO = [{"id": "mil-01", "nome": "MJ GUSTAVO", "nomeCompleto": "GUSTAVO DE SOUZA MENDES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "CHEFE DO DESTACAMENTO", "servico": "CHEFE GERAL"}, {"id": "mil-02", "nome": "1T SAULO BARBOSA", "nomeCompleto": "SAULO JOSE ALVES BARBOSA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ENGENHEIRO CIVIL II", "servico": "ENG PRODUÇÃO"}, {"id": "mil-03", "nome": "1T RIKSON", "nomeCompleto": "RIKSON SILVA OLIVEIRA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "CHEFE DA DIVISÃO DE LOGÍSTICA", "servico": "ENG MECÂNICO"}, {"id": "mil-04", "nome": "1T MAXIMILLIANO", "nomeCompleto": "MAXIMILIANO CAVALCANTE DIAS SOUZA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ENGENHEIRO CIVIL I", "servico": "ENG PLANEJADOR"}, {"id": "mil-05", "nome": "SO R1 REGINALDO", "nomeCompleto": "REGINALDO SÉRGIO FREITAS DO NASCIMENTO", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "TOPÓGRAFO I", "servico": "RECICLAGEM E TRILHOS"}, {"id": "mil-06", "nome": "1S ROTERDAN", "nomeCompleto": "1S ROTERDAN LUSTOSA DE ARAUJO", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "SUPRIMENTISTA", "servico": "ALMOXARIFADO"}, {"id": "mil-07", "nome": "1S DEVIMAGNO", "nomeCompleto": "DEVIMAGNO CHAVES MARTINS", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "CHEFE DE MANUTENÇÃO", "servico": "SUPEVISOR MANUTENÇÃO"}, {"id": "mil-08", "nome": "1S VIANA", "nomeCompleto": "RAFAEL VIANA MOURA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ENCARREGADO DE OBRAS", "servico": "ENCARREGADO DE CONCRETAGEM"}, {"id": "mil-09", "nome": "1S ÂNGELO", "nomeCompleto": "ÂNGELO MÁRCIO DIAS LIMA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "CHEFE DA DIVISÃO DE APOIO", "servico": "ADMINISTRATIVO"}, {"id": "mil-10", "nome": "1S LOBATO", "nomeCompleto": "BERNARDO COSTA DACIER LOBATO", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "TOPÓGRAFO I", "servico": "TRINCHEIRA DRENANTE, CORTE E SELAGEM, SINALIZAÇÃO E TERRAPLENAGEM"}, {"id": "mil-11", "nome": "2S BEZERRA", "nomeCompleto": "KLEBER BEZERRA DA COSTA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "RANCHO", "servico": "COZINHEIRO"}, {"id": "mil-12", "nome": "2S AURÉLIO", "nomeCompleto": "MARCOS AURELIO GONCALVES FERREIRA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ENCARREGADO DE OPERAÇÕES", "servico": "ELO DE LIGAÇÃO ENGENHARIA E MANUTENÇÃO"}, {"id": "mil-13", "nome": "2S RAFAEL", "nomeCompleto": "RAFAEL MACHADO BORGES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - MN", "funcao": "TEC ENFERMAGEM", "servico": "ENFERMEIRO"}, {"id": "mil-14", "nome": "2S ROCHA", "nomeCompleto": "ELCIAS ALVES DA ROCHA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ENCARREGADO COMB LUB", "servico": "CONTROLE DE COMBUSTÍVEIS"}, {"id": "mil-15", "nome": "3S BRITO", "nomeCompleto": "ANDERSON BRITO DA SILVA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "LABORATORISTA", "servico": "ENCARREGADO RECICLAGEM"}, {"id": "mil-16", "nome": "2S DANIELA", "nomeCompleto": "DANIELA ARAUJO SANTANNA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - MN", "funcao": "LABORATORISTA", "servico": "ENCARREGADO CONTROLE TECNOLÓGICO DO CONCRETO"}, {"id": "mil-17", "nome": "3S ROGÉRIO", "nomeCompleto": "ROGÉRIO TEIXEIRA CORDOVIL", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "RANCHO", "servico": "COZINHEIRO"}, {"id": "mil-18", "nome": "3S LENILDO", "nomeCompleto": "LENILDO CARDOSO DA SILVA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "ENCARREGADO SEGURANÇA E DEFESA", "servico": "CHEFE DA GUARDA"}, {"id": "mil-19", "nome": "CB ORIVALDO", "nomeCompleto": "ARTHUR ORIVALDO SILVA LUZ", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "SEGURANÇA E DEFESA", "servico": "GUARDA"}, {"id": "mil-20", "nome": "CB EZEQUIEL", "nomeCompleto": "LUCAS EZEQUIEL SOUZA FIGUEIREDO", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "SEGURANÇA E DEFESA", "servico": "GUARDA"}, {"id": "mil-21", "nome": "CB BARREIRINHAS", "nomeCompleto": "VITOR HUGO BARATA BARREIRINHAS", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "SEGURANÇA E DEFESA", "servico": "GUARDA"}, {"id": "mil-22", "nome": "CB MADSSON", "nomeCompleto": "MADSSON DIEGO MARTINS FURTADO", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "OPERADOR DE EQUIPAMENTOS", "servico": "PÁ CARREGADEIRA, ESCAVADEIRA, TRATOR DE ESTEIRA"}, {"id": "mil-23", "nome": "CB LACÔRTE", "nomeCompleto": "THIAGO CARDOSO LACÔRTE", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "OPERADOR DE EQUIPAMENTOS", "servico": "MOTORISTA"}, {"id": "mil-24", "nome": "CB DIOGO", "nomeCompleto": "DIOGO SANTOS SILVA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "MOTORISTA", "servico": "MOTORISTA"}, {"id": "mil-25", "nome": "CB SANTIAGO", "nomeCompleto": "JOÃO PEDRO PAIXÃO SANTIAGO", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "AUXILIAR DE SUPRIMENTOS", "servico": "SUPRIMENTOS"}, {"id": "mil-26", "nome": "CB JOÃO COSTA", "nomeCompleto": "JOAO VICTOR SILVA sostiene COSTA", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "AUXILIAR DE COMB LUB", "servico": "AUXILIAR DISTRIBUIÇÃO E CONTROLE DE COMSBUSTÍVEIS"}, {"id": "mil-27", "nome": "CB HENRIQUE", "nomeCompleto": "CARLOS HENRIQUE DE CASTRO MORAES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "TORNEIRO MECÂNICO", "servico": "TORNEIRO MECÂNICO"}, {"id": "mil-28", "nome": "CB BRUNO SANTOS", "nomeCompleto": "BRUNO GABRIEL CARRERA SANTOS", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "MOTORISTA", "servico": "MOTORISTA"}, {"id": "mil-29", "nome": "CB GOMES", "nomeCompleto": "LEANDRO DOS SANTOS GOMES", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "MOTORISTA", "servico": "MOTORISTA"}, {"id": "mil-30", "nome": "CB FURTADO", "nomeCompleto": "MAYLSON BEZERRA FURTADO", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "MOTORISTA", "servico": "MOTORISTA"}, {"id": "mil-31", "nome": "S2 LUYG", "nomeCompleto": "LUYG KAUE DOS SANTO DOS REIAS", "tipo": "militar", "subtipo": "militar", "posto": "MILITAR - BE", "funcao": "SEGURANÇA E DEFESA", "servico": "GUARDA"}, {"id": "civ-001", "nome": "Ademar Gomes De Castro", "nomeCompleto": "Ademar Gomes De Castro", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-002", "nome": "Adenilson De Souza Lisboa", "nomeCompleto": "Adenilson De Souza Lisboa", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-003", "nome": "Adoneo Fernandes Da Silva", "nomeCompleto": "Adoneo Fernandes Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-004", "nome": "Adriano Silva De Sena", "nomeCompleto": "Adriano Silva De Sena", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-005", "nome": "Alciney Monteiro Da Silva", "nomeCompleto": "Alciney Monteiro Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-006", "nome": "Aldo Da Costa Sales", "nomeCompleto": "Aldo Da Costa Sales", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "CARPINTEIRO", "servico": ""}, {"id": "civ-007", "nome": "Alex Evangelista De Castro", "nomeCompleto": "Alex Evangelista De Castro", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-008", "nome": "Ananias Correa Cavalcante", "nomeCompleto": "Ananias Correa Cavalcante", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-009", "nome": "Antonio Silvino Mendes De Andrade", "nomeCompleto": "Antonio Silvino Mendes De Andrade", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "MOTORISTA DE CAMINHÃO CAT \"D\"", "servico": ""}, {"id": "civ-010", "nome": "Arlisson Nunes Da Silva", "nomeCompleto": "Arlisson Nunes Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-011", "nome": "Ataide Da Silva Lima", "nomeCompleto": "Ataide Da Silva Lima", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-012", "nome": "Bibiano Cordovil Da Silva", "nomeCompleto": "Bibiano Cordovil Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-013", "nome": "Carlos Antonio Sombra", "nomeCompleto": "Carlos Antonio Sombra", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-014", "nome": "Carlos Alberto Cezário Falcão", "nomeCompleto": "Carlos Alberto Cezário Falcão", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "MECÂNICO GERAL", "servico": ""}, {"id": "civ-015", "nome": "Claudio Santos De Souza", "nomeCompleto": "Claudio Santos De Souza", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-016", "nome": "Cleyson Nascimento De Araujo", "nomeCompleto": "Cleyson Nascimento De Araujo", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-017", "nome": "Cosmo Da Silva Azevedo", "nomeCompleto": "Cosmo Da Silva Azevedo", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERVENTE DE OBRAS", "servico": ""}, {"id": "civ-018", "nome": "Cosmo Joao De Souza Pinheiro", "nomeCompleto": "Cosmo Joao De Souza Pinheiro", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-019", "nome": "Cristovam Da Silva Correa", "nomeCompleto": "Cristovam Da Silva Correa", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-020", "nome": "Damião Alexandre Gomes Da Silva", "nomeCompleto": "Damião Alexandre Gomes Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "ELETRICISTA DE INSTALAÇÕES", "servico": ""}, {"id": "civ-021", "nome": "Damião De Araujo Moura", "nomeCompleto": "Damião De Araujo Moura", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-022", "nome": "Daniel Moreira Auanario", "nomeCompleto": "Daniel Moreira Auanario", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-023", "nome": "Daniel Pinheiro Praia", "nomeCompleto": "Daniel Pinheiro Praia", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERVENTE DE OBRAS", "servico": ""}, {"id": "civ-024", "nome": "Delzenir José Alves Rebouças", "nomeCompleto": "Delzenir José Alves Rebouças", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "OP. COMPACTADORA SOLOS", "servico": ""}, {"id": "civ-025", "nome": "Diones Da Silva Cavalcante", "nomeCompleto": "Diones Da Silva Cavalcante", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-026", "nome": "Edivan Rocha Da Silva", "nomeCompleto": "Edivan Rocha Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-027", "nome": "Edilson Segundo Nascimento", "nomeCompleto": "Edilson Segundo Nascimento", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-028", "nome": "Edgar Dos Santos Araujo", "nomeCompleto": "Edgar Dos Santos Araujo", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-029", "nome": "Edmundo Rodrigues De Araujo Junior", "nomeCompleto": "Edmundo Rodrigues De Araujo Junior", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "OP. PÁ CARREGADEIRA", "servico": ""}, {"id": "civ-030", "nome": "Eliaac Brasil Seabra", "nomeCompleto": "Eliaac Brasil Seabra", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SOLDADOR", "servico": ""}, {"id": "civ-031", "nome": "Eliel Samiro Dos Santos", "nomeCompleto": "Eliel Samiro Dos Santos", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "OP. DE ESCAVADEIRA", "servico": ""}, {"id": "civ-032", "nome": "Elizabeth Da Silva Oliveira", "nomeCompleto": "Elizabeth Da Silva Oliveira", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "COZINHEIRA", "servico": ""}, {"id": "civ-033", "nome": "Elizeu Oliveira De Souza", "nomeCompleto": "Elizeu Oliveira De Souza", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-034", "nome": "Ellander Correa De Almeida", "nomeCompleto": "Ellander Correa De Almeida", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "AUX. MECÂNICO", "servico": ""}, {"id": "civ-035", "nome": "Everton Souza Da Silva", "nomeCompleto": "Everton Souza Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "OP. MAQUINAS", "servico": ""}, {"id": "civ-036", "nome": "Eziel Cabral De Oliveira", "nomeCompleto": "Eziel Cabral De Oliveira", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "OP. TRATOR DE LÂMINA", "servico": ""}, {"id": "civ-037", "nome": "Franciney Ribeiro Da Costa", "nomeCompleto": "Franciney Ribeiro Da Costa", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERVENTE DE OBRAS", "servico": ""}, {"id": "civ-038", "nome": "Francisco Assis Da Silva Cardoso", "nomeCompleto": "Francisco Assis Da Silva Cardoso", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-039", "nome": "Francisco Barbarão De Araújo", "nomeCompleto": "Francisco Barbarão De Araújo", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-040", "nome": "Francisco Da Costa Oliveira", "nomeCompleto": "Francisco Da Costa Oliveira", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "PEDREIRO", "servico": ""}, {"id": "civ-041", "nome": "Geane Gonçalves Dos Santos", "nomeCompleto": "Geane Gonçalves Dos Santos", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "TEC. SEG. DO TRABALHO", "servico": ""}, {"id": "civ-042", "nome": "Geilson Mesquita Pereira", "nomeCompleto": "Geilson Mesquita Pereira", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-043", "nome": "Genival Fernandes Souza", "nomeCompleto": "Genival Fernandes Souza", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "PEDREIRO", "servico": ""}, {"id": "civ-044", "nome": "Gibson Almeida Da Silva", "nomeCompleto": "Gibson Almeida Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-045", "nome": "Guibson Oliveira Barbosa", "nomeCompleto": "Guibson Oliveira Barbosa", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-046", "nome": "Gilsione De Almeida Almeida", "nomeCompleto": "Gilsione De Almeida Almeida", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "OP. MAQUINAS", "servico": ""}, {"id": "civ-047", "nome": "Heitor Souza Da Silva", "nomeCompleto": "Heitor Souza Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "MOTORISTA DE CAMINHÃO CAT \"D\"", "servico": ""}, {"id": "civ-048", "nome": "Iranildo Sales Da Silva", "nomeCompleto": "Iranildo Sales Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-050", "nome": "Ismael Gonçalves Barbosa", "nomeCompleto": "Ismael Gonçalves Barbosa", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-051", "nome": "Ivan Aguiar De Sousa", "nomeCompleto": "Ivan Aguiar De Sousa", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "PEDREIRO", "servico": ""}, {"id": "civ-052", "nome": "Jairo Viana De Souza", "nomeCompleto": "Jairo Viana De Souza", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "PEDREIRO", "servico": ""}, {"id": "civ-053", "nome": "Jander Lira Machado", "nomeCompleto": "Jander Lira Machado", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERVENTE DE OBRAS", "servico": ""}, {"id": "civ-054", "nome": "Janio Do Nascimento Queiroz", "nomeCompleto": "Janio Do Nascimento Queiroz", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERVENTE DE OBRAS", "servico": ""}, {"id": "civ-055", "nome": "Jeferson Azevedo De Carvalho", "nomeCompleto": "Jeferson Azevedo De Carvalho", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-056", "nome": "Jelson Da Silva Guedes", "nomeCompleto": "Jelson Da Silva Guedes", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "ARM. ESTRUT. CONCRETO ARMADO", "servico": ""}, {"id": "civ-057", "nome": "Jessé Souza De Moura", "nomeCompleto": "Jessé Souza De Moura", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-058", "nome": "João Batista Pereira Da Silva", "nomeCompleto": "João Batista Pereira Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "ENCANADOR", "servico": ""}, {"id": "civ-059", "nome": "Jonadabis Almeida De Almeida", "nomeCompleto": "Jonadabis Almeida De Almeida", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "OP. MAQUINAS", "servico": ""}, {"id": "civ-060", "nome": "Jones Silva De Melo", "nomeCompleto": "Jones Silva De Melo", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-061", "nome": "Jose Carlos Mendes De Castro", "nomeCompleto": "Jose Carlos Mendes De Castro", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-062", "nome": "Jonei Fernandes Monteiro", "nomeCompleto": "Jonei Fernandes Monteiro", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "PEDREIRO", "servico": ""}, {"id": "civ-063", "nome": "Jose Ferreira De Magalhães", "nomeCompleto": "Jose Ferreira De Magalhães", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-064", "nome": "Jose Ronivon Ferreira De Freitas", "nomeCompleto": "Jose Ronivon Ferreira De Freitas", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "MOTORISTA DE CAMINHÃO CAT \"D\"", "servico": ""}, {"id": "civ-065", "nome": "Josias Dos Santos Carvalho", "nomeCompleto": "Josias Dos Santos Carvalho", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-066", "nome": "Josimar Falcão Lira", "nomeCompleto": "Josimar Falcão Lira", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "PEDREIRO", "servico": ""}, {"id": "civ-067", "nome": "Juan Feitosa De Freitas", "nomeCompleto": "Juan Feitosa De Freitas", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "OP. MAQUINAS", "servico": ""}, {"id": "civ-068", "nome": "Jucimar Ferreira De Freitas Junior", "nomeCompleto": "Jucimar Ferreira De Freitas Junior", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-069", "nome": "Junior Almeida Da Silva", "nomeCompleto": "Junior Almeida Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "MECÂNICO DE MOTOR A DIESEL", "servico": ""}, {"id": "civ-070", "nome": "Lailson Nascimento Dos Santos", "nomeCompleto": "Lailson Nascimento Dos Santos", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-071", "nome": "Laura Lopes Nunes Dos Santos", "nomeCompleto": "Laura Lopes Nunes Dos Santos", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "COZINHEIRA", "servico": ""}, {"id": "civ-072", "nome": "Luciano De Souza Ferreira", "nomeCompleto": "Luciano De Souza Ferreira", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-073", "nome": "Luiz Fernando Bernardo De Vasconcelos", "nomeCompleto": "Luiz Fernando Bernardo De Vasconcelos", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERVENTE DE OBRAS", "servico": ""}, {"id": "civ-074", "nome": "Maikon Junior Torres Barroso", "nomeCompleto": "Maikon Junior Torres Barroso", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "OPERADOR DE MOTONIVELADORA", "servico": ""}, {"id": "civ-075", "nome": "Maria De Lourdes De Souza Alves", "nomeCompleto": "Maria De Lourdes De Souza Alves", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "AUX. DE COZINHA", "servico": ""}, {"id": "civ-076", "nome": "Maria Eduarda De Souza Pinheiro", "nomeCompleto": "Maria Eduarda De Souza Pinheiro", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "OP. MAQUINAS", "servico": ""}, {"id": "civ-077", "nome": "Maricel Pinheiro Monteiro", "nomeCompleto": "Maricel Pinheiro Monteiro", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "ELETRICISTA", "servico": ""}, {"id": "civ-078", "nome": "Marivaldo De Souza Verganho", "nomeCompleto": "Marivaldo De Souza Verganho", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "MOTORISTA DE CAMINHÃO CAT \"D\"", "servico": ""}, {"id": "civ-079", "nome": "Marivone Viana Da Silva", "nomeCompleto": "Marivone Viana Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "MOTORISTA DE CAMINHÃO CAT \"D\"", "servico": ""}, {"id": "civ-080", "nome": "Mateus Marques Ribeiro", "nomeCompleto": "Mateus Marques Ribeiro", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-081", "nome": "Memésio Dos Santos Ataide", "nomeCompleto": "Memésio Dos Santos Ataide", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-082", "nome": "Moizaniel Rebouças Ramos", "nomeCompleto": "Moizaniel Rebouças Ramos", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "OP. MAQUINAS", "servico": ""}, {"id": "civ-083", "nome": "Moises Candido Marinho", "nomeCompleto": "Moises Candido Marinho", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-084", "nome": "Neuber Mendes Costa", "nomeCompleto": "Neuber Mendes Costa", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-085", "nome": "Oliveira Nunes Neto", "nomeCompleto": "Oliveira Nunes Neto", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "PEDREIRO", "servico": ""}, {"id": "civ-086", "nome": "Ozaias Pereira Da Silva", "nomeCompleto": "Ozaias Pereira Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-087", "nome": "Paulo Alvez Gomes", "nomeCompleto": "Paulo Alvez Gomes", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-088", "nome": "Radames Vieira Da Silva", "nomeCompleto": "Radames Vieira Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "LUBRIFICADOR DE VEÍCULOS AUTOMOTORES", "servico": ""}, {"id": "civ-089", "nome": "Rafael Dos Santos Garcia", "nomeCompleto": "Rafael Dos Santos Garcia", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-090", "nome": "Raimundo Nonato Carvalho Soares", "nomeCompleto": "Raimundo Nonato Carvalho Soares", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-091", "nome": "Raionilson Figueiredo Da Silva", "nomeCompleto": "Raionilson Figueiredo Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "MOTORISTA OPERACIONAL DE GUINCHO", "servico": ""}, {"id": "civ-092", "nome": "Raymisson Lucas Magalhães De Castro", "nomeCompleto": "Raymisson Lucas Magalhães De Castro", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-093", "nome": "Roberio Alvez Da Silva", "nomeCompleto": "Roberio Alvez Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-094", "nome": "Ronaldo Mota Araujo", "nomeCompleto": "Ronaldo Mota Araujo", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-095", "nome": "Ronei Ferreira De Araújo", "nomeCompleto": "Ronei Ferreira De Araújo", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-096", "nome": "Rusivaldo Da Silva Guimaraes", "nomeCompleto": "Rusivaldo Da Silva Guimaraes", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-097", "nome": "Sanderson Najar De Souza", "nomeCompleto": "Sanderson Najar De Souza", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "OP. ESCAVADEIRA", "servico": ""}, {"id": "civ-098", "nome": "Silzonei Coelho De Souza", "nomeCompleto": "Silzonei Coelho De Souza", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERVENTE DE OBRAS", "servico": ""}, {"id": "civ-099", "nome": "Vilson Monteiro Da Silva", "nomeCompleto": "Vilson Monteiro Da Silva", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "PEDREIRO", "servico": ""}, {"id": "civ-100", "nome": "Wanderley Bernardo De Vasconcelos", "nomeCompleto": "Wanderley Bernardo De Vasconcelos", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "SERV. OBRAS", "servico": ""}, {"id": "civ-102", "nome": "Zito Marques Cavalcante", "nomeCompleto": "Zito Marques Cavalcante", "tipo": "civil", "subtipo": "civil-ko", "posto": "SPTF-KO", "funcao": "OP. DE ESCAVADEIRA", "servico": ""}, {"id": "civ-104", "nome": "Francisco Sousa Soares", "nomeCompleto": "Francisco Sousa Soares", "tipo": "civil", "subtipo": "civil-be", "posto": "SPTF-BE", "funcao": "CARPINTEIRO", "servico": ""}, {"id": "civ-105", "nome": "Erias Silva De Souza", "nomeCompleto": "Erias Silva De Souza", "tipo": "civil", "subtipo": "civil-be", "posto": "SPTF-BE", "funcao": "MECÂNICO DE MÁQUINAS", "servico": ""}, {"id": "civ-106", "nome": "Sérgio Luiz Alves De Carvalho", "nomeCompleto": "Sérgio Luiz Alves De Carvalho", "tipo": "civil", "subtipo": "civil-be", "posto": "SPTF-BE", "funcao": "ELETRICISTA DE AUTOS", "servico": ""}, {"id": "civ-107", "nome": "Antonio Ferreira Maciel", "nomeCompleto": "Antonio Ferreira Maciel", "tipo": "civil", "subtipo": "civil-be", "posto": "SPTF-BE", "funcao": "OPERADOR DE TEREX", "servico": ""}, {"id": "civ-108", "nome": "Jamison De Oliveira Monteiro", "nomeCompleto": "Jamison De Oliveira Monteiro", "tipo": "civil", "subtipo": "civil-be", "posto": "SPTF-BE", "funcao": "MOTORISTA", "servico": ""}, {"id": "civ-109", "nome": "Ana Paula Barros Da Silva", "nomeCompleto": "Ana Paula Barros Da Silva", "tipo": "civil", "subtipo": "civil-be", "posto": "SPTF-BE", "funcao": "AUX DE DA", "servico": ""}, {"id": "civ-110", "nome": "Robson Cesar Lima Da Silva", "nomeCompleto": "Robson Cesar Lima Da Silva", "tipo": "civil", "subtipo": "civil-be", "posto": "SPTF-BE", "funcao": "BORRACHEIRO", "servico": ""}];
 
@@ -441,8 +441,253 @@ const DEFAULT_STATE_JULHO = {
   }
 };
 
+// IDs dos trabalhadores que SAEM no PAA Setembro (34 IDs)
+const PAA_SETEMBRO_REMOVED = [
+  "civ-111",
+  "civ-112",
+  "mil-41",
+  "civ-113",
+  "mil-62",
+  "mil-63",
+  "mil-64",
+  "mil-65",
+  "mil-66",
+  "mil-67",  // 1S SCHOLZ
+  "mil-68",
+  "mil-69",
+  "mil-70",
+  "mil-71",
+  "mil-72",
+  "mil-73",
+  "mil-74",
+  "mil-75",
+  "mil-76",
+  "mil-77",  // S1 LIMA SANTOS
+  "mil-78",
+  "mil-79",
+  "mil-80",
+  "mil-81",
+  "mil-82",
+  "mil-84",
+  "mil-86",
+  "civ-114",
+  "civ-115",
+  "mil-87",  // CB G BRUNO
+  "mil-88",
+  "mil-89",
+  "mil-90",
+  "civ-117"  // SPPF AMARILDO
+];
+
+// 37 trabalhadores que CHEGAM no PAA Setembro
+const PAA_SETEMBRO_ADDED = [
+  {"id":"mil-91","nome":"MJ MELO","nomeCompleto":"DIEGO MENESES DE MELO","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"CHEFE DE CANTEIRO","servico":""},
+  {"id":"mil-92","nome":"1T SAULO BARBOSA","nomeCompleto":"SAULO JOSÉ ALVES BARBOSA","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"CHEFE DE ENGENHARIA","servico":""},
+  {"id":"mil-93","nome":"1T RIKSON","nomeCompleto":"RIKSON SILVA OLIVEIRA","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"CHEFE DE LOGÍSTICA","servico":""},
+  {"id":"mil-94","nome":"1T ROCHA","nomeCompleto":"JAIR NOGUEIRA DA ROCHA JÚNIOR","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"CHEFE DE DA","servico":""},
+  {"id":"mil-95","nome":"SO SOARES","nomeCompleto":"ROBERTO CARLOS SOARES DE ALMEIDA","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"LABORATORISTA","servico":""},
+  {"id":"mil-96","nome":"SO DA SILVA","nomeCompleto":"JOSE WELLINGTON DA SILVA","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"ENC. OPERAÇÕES","servico":""},
+  {"id":"mil-97","nome":"1S JEFERSON","nomeCompleto":"JEFERSON SOUSA DA CUNHA","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"ELETRICISTA","servico":""},
+  {"id":"mil-98","nome":"1S TALLES","nomeCompleto":"TALLES MADURO DA SILVA VIANA","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"ENCARREGADO DE OBRAS","servico":""},
+  {"id":"mil-99","nome":"1S ROTERDAN","nomeCompleto":"ROTERDAN LUSTOSA DE ARAUJO","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"ENC. SUPRIMENTO","servico":""},
+  {"id":"mil-100","nome":"1S M MATOSO","nomeCompleto":"MICHEL MATOSO ROCHA","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"ARRUMADOR","servico":""},
+  {"id":"mil-101","nome":"1S TILLMANN","nomeCompleto":"HYGOR MORAES TILLMANN","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"TOPÓGRAFO","servico":""},
+  {"id":"mil-102","nome":"2S RAFAEL","nomeCompleto":"RAFAEL MACHADO BORGES","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"TEC. ENFERMAGEM","servico":""},
+  {"id":"mil-103","nome":"2S RITA","nomeCompleto":"RITA DE CÁSSIA DE FARIAS ANDRADE","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"TOPÓGRAFO","servico":""},
+  {"id":"mil-104","nome":"2S ROCHA","nomeCompleto":"ELCIAS ALVES DA ROCHA","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"ENC. COMBLUB","servico":""},
+  {"id":"mil-105","nome":"3S ANDERSON","nomeCompleto":"ANDERSON DA SILVA GOMES","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"ENCARREGADO DE OBRAS","servico":""},
+  {"id":"mil-106","nome":"CB LOPES","nomeCompleto":"JOSÉ LUIZ DA SILVA LOPES","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"AUXILIAR DE MANUTENÇÃO","servico":""},
+  {"id":"mil-107","nome":"CB LACORTE","nomeCompleto":"THIAGO CARDOSO LACORTE","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"MOTORISTA CAT. D","servico":""},
+  {"id":"mil-108","nome":"CB AVIZ","nomeCompleto":"GERSON DIEGO DE AVIZ NASCIMENTO","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"MOTORISTA CAT. D","servico":""},
+  {"id":"mil-109","nome":"CB LEAL","nomeCompleto":"PATRICK LEAL DOS SANTOS","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"OPERADOR DE MÁQUINAS","servico":""},
+  {"id":"mil-110","nome":"CB BRUNO SANTOS","nomeCompleto":"BRUNO GABRIEL CARRERA SANTOS","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"AUX. COMBLUB","servico":""},
+  {"id":"mil-111","nome":"CB FERNANDO","nomeCompleto":"FERNANDO FERREIRA FERNANDES","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"AUX. SUPRIMENTO","servico":""},
+  {"id":"mil-112","nome":"CB IVANILSON","nomeCompleto":"ANTONIO IVANILSON SOARES DA CUNHA","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"REFRIGERAÇÃO","servico":""},
+  {"id":"mil-113","nome":"CB EZEQUIEL","nomeCompleto":"LUCAS EZEQUIEL SOUZA FIGUEIREDO","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"SEGURANÇA E DEFESA","servico":""},
+  {"id":"mil-114","nome":"CB A. OLIVEIRA","nomeCompleto":"DANIEL ARAUJO DE OLIVEIRA","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"SEGURANÇA E DEFESA","servico":""},
+  {"id":"mil-115","nome":"CB NATAN","nomeCompleto":"PEDRO NATAN DE SOUZA LEÃO","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"SEGURANÇA E DEFESA","servico":""},
+  {"id":"civ-123","nome":"SPTF ERIAS","nomeCompleto":"ERIAS SILVA DE SOUZA","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"MECÂNICO DE MÁQUIAS","servico":""},
+  {"id":"civ-124","nome":"SPTF SANDRO","nomeCompleto":"SANDRO ALEX SILVA DA SILVA","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"ARMADOR","servico":""},
+  {"id":"civ-125","nome":"SPTF FRANCISCO","nomeCompleto":"FRANCISCO SOUSA SOARES","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"CARPINTEIRO","servico":""},
+  {"id":"civ-126","nome":"SPTF ANA PAULA","nomeCompleto":"ANA PAULA BARROS DA SILVA","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"AUX.DA","servico":""},
+  {"id":"civ-127","nome":"SPTF ANTONIO","nomeCompleto":"ANTONIO FERREIRA MACIEL","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"OP. DE MÁQUINAS","servico":""},
+  {"id":"civ-128","nome":"SPTF EWERTON","nomeCompleto":"EWERTON LUIZ CORDEIRO VALADAR","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"ELETRECISTA DE AUTO","servico":""},
+  {"id":"civ-129","nome":"SPTF MADSON","nomeCompleto":"MADSON CLOVIS COSTA FILHO","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"COZINHEIRO","servico":""},
+  {"id":"civ-130","nome":"SPTF PAULO ROBERTO","nomeCompleto":"PAULO ROBERTO MONTEIRO ARAÚJO","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"MECÂNICO","servico":""},
+  {"id":"civ-131","nome":"SPTF ROBSON","nomeCompleto":"ROBSON CESAR LIMA DA SILVA","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"BORRACHEIRO","servico":""},
+  {"id":"civ-132","nome":"SPTF JOSE MENESCAL","nomeCompleto":"JOSE MENESCAL DE SOUZA","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"MOTORISTA DE VIATURAS OFICIAIS","servico":""},
+  {"id":"civ-133","nome":"SPTF IZAAC","nomeCompleto":"IZAAC COSTA DE PAULA","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"MOTORISTA DE VIATURAS OFICIAIS","servico":""},
+  {"id":"civ-134","nome":"FERNANDO ALVES AMAZONAS","nomeCompleto":"FERNANDO ALVES AMAZONAS","tipo":"civil","subtipo":"civil-ko","posto":"SPTF-KO","funcao":"AUX. ALMOXARIFADO","servico":""}
+];
+
+const WORKERS_SETEMBRO = WORKERS_JULHO.filter(w => !PAA_SETEMBRO_REMOVED.includes(w.id)).concat(PAA_SETEMBRO_ADDED);
+
+const TEAMS_SETEMBRO = TEAMS_MAIO;
+
+// Estado inicial baseado no PAA Julho, com trabalhadores removidos limpos (null)
+const DEFAULT_STATE_SETEMBRO = {
+  "comando": {
+    "0": {
+      "0": null,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null
+    }
+  },
+  "cdc": {
+    "0": {
+      "0": "civ-014",
+      "1": "civ-031",
+      "2": "civ-102",
+      "3": null,
+      "4": null,
+      "5": "civ-058",
+      "6": "civ-073",
+      "7": "civ-083",
+      "8": null,
+      "9": null,
+      "10": null,
+      "11": "civ-005",
+      "12": "civ-026",
+      "13": "civ-081",
+      "14": "civ-022"
+    }
+  },
+  "concretagem": {
+    "0": {
+      "0": null,
+      "1": null,
+      "2": "civ-061",
+      "3": "civ-015",
+      "4": "civ-002",
+      "5": "civ-083",
+      "6": null,
+      "7": "civ-065",
+      "8": "civ-090",
+      "9": "civ-099",
+      "10": "civ-066",
+      "11": "civ-052",
+      "12": "civ-043",
+      "13": "civ-051",
+      "14": "civ-004",
+      "15": "civ-085",
+      "16": "civ-070",
+      "17": "civ-056"
+    }
+  },
+  "reciclagem": {
+    "0": {
+      "0": null,
+      "2": null,
+      "3": "civ-074",
+      "4": "civ-024",
+      "5": null,
+      "6": "civ-036",
+      "7": "civ-035",
+      "8": "civ-046",
+      "9": "civ-067",
+      "10": "civ-091",
+      "11": "civ-064",
+      "13": null
+    }
+  },
+  "trilhos-rasga": {
+    "0": {
+      "0": null,
+      "1": "civ-050",
+      "2": "civ-021",
+      "3": "civ-087",
+      "4": "civ-045",
+      "5": "civ-017",
+      "6": "civ-055",
+      "7": "civ-089",
+      "8": "civ-013",
+      "9": null,
+      "10": "civ-019"
+    }
+  },
+  "topografia": {
+    "0": {
+      "0": null,
+      "1": null,
+      "2": null,
+      "3": "civ-068",
+      "4": "civ-092",
+      "5": "civ-012"
+    }
+  },
+  "trincheira": {
+    "0": {
+      "0": null
+    }
+  },
+  "corte-selagem": {
+    "0": {
+      "0": null
+    }
+  },
+  "manutencao": {
+    "0": {
+      "0": null,
+      "1": null,
+      "2": "civ-014",
+      "3": "civ-069",
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": "civ-030",
+      "8": "civ-088",
+      "9": null
+    }
+  },
+  "apoio": {
+    "0": {
+      "0": null,
+      "1": null
+    },
+    "1": {
+      "0": null,
+      "1": null
+    },
+    "2": {
+      "0": null,
+      "1": null,
+      "2": "civ-032",
+      "3": "civ-071",
+      "4": null
+    },
+    "3": {
+      "0": null,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null
+    },
+    "4": {
+      "0": null,
+      "1": null,
+      "2": "civ-041",
+      "3": null
+    }
+  },
+  "motoristas": {
+    "0": {
+      "0": null,
+      "1": null,
+      "2": null,
+      "3": null,
+      "4": null,
+      "5": null,
+      "6": null,
+      "7": null,
+      "8": null
+    }
+  }
+};
+
 // Determina qual conjunto expor dinamicamente baseado na sessão
 var selectedPaa = sessionStorage.getItem('decoko_paa') || 'maio';
-const WORKERS = selectedPaa === 'julho' ? WORKERS_JULHO : selectedPaa === 'junho' ? WORKERS_JUNHO : WORKERS_MAIO;
-const TEAMS = selectedPaa === 'julho' ? TEAMS_JULHO : selectedPaa === 'junho' ? TEAMS_JUNHO : TEAMS_MAIO;
-const DEFAULT_STATE = selectedPaa === 'julho' ? DEFAULT_STATE_JULHO : selectedPaa === 'junho' ? DEFAULT_STATE_JUNHO : DEFAULT_STATE_MAIO;
+const WORKERS = selectedPaa === 'setembro' ? WORKERS_SETEMBRO : selectedPaa === 'julho' ? WORKERS_JULHO : selectedPaa === 'junho' ? WORKERS_JUNHO : WORKERS_MAIO;
+const TEAMS = selectedPaa === 'setembro' ? TEAMS_SETEMBRO : selectedPaa === 'julho' ? TEAMS_JULHO : selectedPaa === 'junho' ? TEAMS_JUNHO : TEAMS_MAIO;
+const DEFAULT_STATE = selectedPaa === 'setembro' ? DEFAULT_STATE_SETEMBRO : selectedPaa === 'julho' ? DEFAULT_STATE_JULHO : selectedPaa === 'junho' ? DEFAULT_STATE_JUNHO : DEFAULT_STATE_MAIO;

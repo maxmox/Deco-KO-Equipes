@@ -389,3 +389,8 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
   color: #f97316;
   border-color: rgba(249, 115, 22, 0.3);
 }
+.paa-badge.setembro {
+  background: rgba(20, 184, 166, 0.15);
+  color: #14b8a6;
+  border-color: rgba(20, 184, 166, 0.3);
+}

@@ -2,17 +2,17 @@
    Slots fully managed in localStorage: add, remove, reorder */
 
 var selectedPaa = sessionStorage.getItem('decoko_paa') || 'maio';
-const STATE_KEY = selectedPaa === 'julho' ? 'deco-ko-state-v6-julho' : selectedPaa === 'junho' ? 'deco-ko-state-v6-junho' : 'deco-ko-state-v6';
-const EDITS_KEY = selectedPaa === 'julho' ? 'deco-ko-edits-v1-julho' : selectedPaa === 'junho' ? 'deco-ko-edits-v1-junho' : 'deco-ko-edits-v1';
+const STATE_KEY = selectedPaa === 'setembro' ? 'deco-ko-state-v6-setembro' : selectedPaa === 'julho' ? 'deco-ko-state-v6-julho' : selectedPaa === 'junho' ? 'deco-ko-state-v6-junho' : 'deco-ko-state-v6';
+const EDITS_KEY = selectedPaa === 'setembro' ? 'deco-ko-edits-v1-setembro' : selectedPaa === 'julho' ? 'deco-ko-edits-v1-julho' : selectedPaa === 'junho' ? 'deco-ko-edits-v1-junho' : 'deco-ko-edits-v1';
 let appState = {}; // { slots: {teamId:{sgIdx:[{label,worker}]}}, edits:{} }
 let activeSnapshotId = null;
 let activeSnapshotName = '';
 
 // Firebase Paths
 const DB_PATHS = {
-  appState: selectedPaa === 'julho' ? 'appState_julho' : selectedPaa === 'junho' ? 'appState_junho' : 'appState',
-  activeSnapshotId: selectedPaa === 'julho' ? 'activeSnapshotId_julho' : selectedPaa === 'junho' ? 'activeSnapshotId_junho' : 'activeSnapshotId',
-  history: selectedPaa === 'julho' ? 'history_julho' : selectedPaa === 'junho' ? 'history_junho' : 'history'
+  appState: selectedPaa === 'setembro' ? 'appState_setembro' : selectedPaa === 'julho' ? 'appState_julho' : selectedPaa === 'junho' ? 'appState_junho' : 'appState',
+  activeSnapshotId: selectedPaa === 'setembro' ? 'activeSnapshotId_setembro' : selectedPaa === 'julho' ? 'activeSnapshotId_julho' : selectedPaa === 'junho' ? 'activeSnapshotId_junho' : 'activeSnapshotId',
+  history: selectedPaa === 'setembro' ? 'history_setembro' : selectedPaa === 'julho' ? 'history_julho' : selectedPaa === 'junho' ? 'history_junho' : 'history'
 };
 
 let db = null;
@@ -42,8 +42,8 @@ function init() {
   // Badge do PAA no título
   const titleEl = document.querySelector('.header h1');
   if (titleEl) {
-    const labelText = selectedPaa === 'julho' ? 'PAA Julho' : selectedPaa === 'junho' ? 'PAA Junho' : 'PAA Maio';
-    const badgeClass = selectedPaa === 'julho' ? 'paa-badge julho' : selectedPaa === 'junho' ? 'paa-badge junho' : 'paa-badge maio';
+    const labelText = selectedPaa === 'setembro' ? 'PAA Setembro' : selectedPaa === 'julho' ? 'PAA Julho' : selectedPaa === 'junho' ? 'PAA Junho' : 'PAA Maio';
+    const badgeClass = selectedPaa === 'setembro' ? 'paa-badge setembro' : selectedPaa === 'julho' ? 'paa-badge julho' : selectedPaa === 'junho' ? 'paa-badge junho' : 'paa-badge maio';
     titleEl.innerHTML = `🏗️ <span>DECO-KO</span> — Controle de Equipes <span class="${badgeClass}">${labelText}</span>`;
   }
 
@@ -154,6 +154,20 @@ function checkLogin() {
     document.getElementById('loginOverlay').style.display = 'none';
     document.getElementById('loginError').style.display = 'none';
     location.reload();
+  } else if (u === 'deco-setembro' && p === 'comara123') {
+    sessionStorage.setItem('decoko_auth', 'true');
+    sessionStorage.setItem('decoko_readonly', 'false');
+    sessionStorage.setItem('decoko_paa', 'setembro');
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('loginError').style.display = 'none';
+    location.reload();
+  } else if (u === 'visualizar-setembro' && p === 'comara123') {
+    sessionStorage.setItem('decoko_auth', 'true');
+    sessionStorage.setItem('decoko_readonly', 'true');
+    sessionStorage.setItem('decoko_paa', 'setembro');
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('loginError').style.display = 'none';
+    location.reload();
   } else {
     document.getElementById('loginError').style.display = 'block';
   }
@@ -202,7 +216,7 @@ function normalizeStateArrays(state) {
 }
 
 function initializeDefaultState() {
-  if (selectedPaa === 'junho' || selectedPaa === 'julho') {
+  if (selectedPaa === 'junho' || selectedPaa === 'julho' || selectedPaa === 'setembro') {
     appState = { slots: {}, edits: {}, teams: JSON.parse(JSON.stringify(TEAMS)) };
     appState.teams.forEach(t => {
       appState.slots[t.id] = {};
