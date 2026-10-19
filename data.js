@@ -441,7 +441,7 @@ const DEFAULT_STATE_JULHO = {
   }
 };
 
-// IDs dos trabalhadores que SAEM no PAA Setembro (34 IDs)
+// IDs dos trabalhadores que SAEM no PAA Setembro (37 IDs)
 const PAA_SETEMBRO_REMOVED = [
   "civ-111",
   "civ-112",
@@ -476,10 +476,13 @@ const PAA_SETEMBRO_REMOVED = [
   "mil-88",
   "mil-89",
   "mil-90",
-  "civ-117"  // SPPF AMARILDO
+  "civ-117",  // SPPF AMARILDO
+  "mil-83",  // 1S JOSIEL (não faz parte do efetivo)
+  "mil-99",  // 1S ROTERDAN (não faz parte do efetivo)
+  "mil-112"  // CB IVANILSON (não faz parte do efetivo)
 ];
 
-// 37 trabalhadores que CHEGAM no PAA Setembro
+// 38 trabalhadores que CHEGAM no PAA Setembro
 const PAA_SETEMBRO_ADDED = [
   {"id":"mil-91","nome":"MJ MELO","nomeCompleto":"DIEGO MENESES DE MELO","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"CHEFE DE CANTEIRO","servico":""},
   {"id":"mil-92","nome":"1T SAULO BARBOSA","nomeCompleto":"SAULO JOSÉ ALVES BARBOSA","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"CHEFE DE ENGENHARIA","servico":""},
@@ -517,10 +520,11 @@ const PAA_SETEMBRO_ADDED = [
   {"id":"civ-131","nome":"SPTF ROBSON","nomeCompleto":"ROBSON CESAR LIMA DA SILVA","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"BORRACHEIRO","servico":""},
   {"id":"civ-132","nome":"SPTF JOSE MENESCAL","nomeCompleto":"JOSE MENESCAL DE SOUZA","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"MOTORISTA DE VIATURAS OFICIAIS","servico":""},
   {"id":"civ-133","nome":"SPTF IZAAC","nomeCompleto":"IZAAC COSTA DE PAULA","tipo":"civil","subtipo":"civil-be","posto":"SPTF-BE","funcao":"MOTORISTA DE VIATURAS OFICIAIS","servico":""},
-  {"id":"civ-134","nome":"FERNANDO ALVES AMAZONAS","nomeCompleto":"FERNANDO ALVES AMAZONAS","tipo":"civil","subtipo":"civil-ko","posto":"SPTF-KO","funcao":"AUX. ALMOXARIFADO","servico":""}
+  {"id":"civ-134","nome":"FERNANDO ALVES AMAZONAS","nomeCompleto":"FERNANDO ALVES AMAZONAS","tipo":"civil","subtipo":"civil-ko","posto":"SPTF-KO","funcao":"AUX. ALMOXARIFADO","servico":""},
+  {"id":"mil-116","nome":"MJ KAULIN","nomeCompleto":"KAULIN AUGUSTO MATSUMOTO CORREIA LIMA","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"CHEFE DE CANTEIRO","servico":""}
 ];
 
-const WORKERS_SETEMBRO = WORKERS_JULHO.filter(w => !PAA_SETEMBRO_REMOVED.includes(w.id)).concat(PAA_SETEMBRO_ADDED);
+const WORKERS_SETEMBRO = WORKERS_JULHO.concat(PAA_SETEMBRO_ADDED).filter(w => !PAA_SETEMBRO_REMOVED.includes(w.id));
 
 const TEAMS_SETEMBRO = TEAMS_MAIO;
 
@@ -761,7 +765,7 @@ const PAA_OUTUBRO_ADDED = [
   {"id":"mil-140","nome":"CB MARCELO","nomeCompleto":"CARLOS MARCELO CARDOSO NUNES","tipo":"militar","subtipo":"militar","posto":"MILITAR - BE","funcao":"SEGURANÇA E DEFESA","servico":""}
 ];
 
-const WORKERS_OUTUBRO = WORKERS_SETEMBRO.filter(w => !PAA_OUTUBRO_REMOVED.includes(w.id)).concat(PAA_OUTUBRO_ADDED);
+const WORKERS_OUTUBRO = WORKERS_SETEMBRO.filter(w => !PAA_OUTUBRO_REMOVED.includes(w.id) && !PAA_OUTUBRO_ADDED.some(a => a.id === w.id)).concat(PAA_OUTUBRO_ADDED);
 
 const TEAMS_OUTUBRO = TEAMS_MAIO;
 
